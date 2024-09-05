@@ -1,47 +1,47 @@
-# Org.OpenAPITools.Api.NotifyTokenUpdatedApi
+# Acme.App.MastercardApi.Client.Api.NotifyTokenUpdatedApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *https://mybank.com/issuerServices/1/0*
 
 | Method | HTTP request | Description |
 |--------|--------------|-------------|
-| [**NotifyTokenUpdateForTokenStateChange**](NotifyTokenUpdatedApi.md#notifytokenupdatefortokenstatechange) | **POST** /digitization/static/1/0/notifyTokenUpdated | Outbound API used by MDES to notify the Token Requestor of significant Token updates, such as when the Token is activated, suspended, unsuspended or deleted; or when information about the Token or its product configuration has changed. |
+| [**NotifyTokenUpdated**](NotifyTokenUpdatedApi.md#notifytokenupdated) | **POST** /notifyTokenUpdated | Notify the Issuer of significant token updates, such as when the token is suspended, unsuspended or deleted. |
 
-<a id="notifytokenupdatefortokenstatechange"></a>
-# **NotifyTokenUpdateForTokenStateChange**
-> NotifyTokenUpdatedResults NotifyTokenUpdateForTokenStateChange (NotifyTokenUpdated notifyTokenUpdated)
+<a id="notifytokenupdated"></a>
+# **NotifyTokenUpdated**
+> NotifyTokenUpdatedResponseSchema NotifyTokenUpdated (NotifyTokenUpdatedRequestSchema notifyTokenUpdatedRequestSchema)
 
-Outbound API used by MDES to notify the Token Requestor of significant Token updates, such as when the Token is activated, suspended, unsuspended or deleted; or when information about the Token or its product configuration has changed.
+Notify the Issuer of significant token updates, such as when the token is suspended, unsuspended or deleted.
 
-This API is used by MDES to notify the Token Requestor of significant Token updates.  
+NotifyTokenUpdated is used by MDES to notify the Issuer of significant token updates, such as when the token is suspended, unsuspended or deleted; or when information about the token or its product configuration has changed. It may be triggered as a result of Service Provider update (for example, the provider suspends or deletes the token), or if MDES changes the state of a token. The state transition diagram used by MDES is presented in the figure here (https://developer.mastercard.com/mdes-pre-digitization/documentation/api-basics/token_states_transition/)
 
 ### Example
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Acme.App.MastercardApi.Client.Api;
+using Acme.App.MastercardApi.Client.Client;
+using Acme.App.MastercardApi.Client.Model;
 
 namespace Example
 {
-    public class NotifyTokenUpdateForTokenStateChangeExample
+    public class NotifyTokenUpdatedExample
     {
         public static void Main()
         {
             Configuration config = new Configuration();
-            config.BasePath = "http://localhost";
+            config.BasePath = "https://mybank.com/issuerServices/1/0";
             var apiInstance = new NotifyTokenUpdatedApi(config);
-            var notifyTokenUpdated = new NotifyTokenUpdated(); // NotifyTokenUpdated | Notify Token Updated request
+            var notifyTokenUpdatedRequestSchema = new NotifyTokenUpdatedRequestSchema(); // NotifyTokenUpdatedRequestSchema | Contains the details of the request message.
 
             try
             {
-                // Outbound API used by MDES to notify the Token Requestor of significant Token updates, such as when the Token is activated, suspended, unsuspended or deleted; or when information about the Token or its product configuration has changed.
-                NotifyTokenUpdatedResults result = apiInstance.NotifyTokenUpdateForTokenStateChange(notifyTokenUpdated);
+                // Notify the Issuer of significant token updates, such as when the token is suspended, unsuspended or deleted.
+                NotifyTokenUpdatedResponseSchema result = apiInstance.NotifyTokenUpdated(notifyTokenUpdatedRequestSchema);
                 Debug.WriteLine(result);
             }
             catch (ApiException  e)
             {
-                Debug.Print("Exception when calling NotifyTokenUpdatedApi.NotifyTokenUpdateForTokenStateChange: " + e.Message);
+                Debug.Print("Exception when calling NotifyTokenUpdatedApi.NotifyTokenUpdated: " + e.Message);
                 Debug.Print("Status Code: " + e.ErrorCode);
                 Debug.Print(e.StackTrace);
             }
@@ -50,21 +50,21 @@ namespace Example
 }
 ```
 
-#### Using the NotifyTokenUpdateForTokenStateChangeWithHttpInfo variant
+#### Using the NotifyTokenUpdatedWithHttpInfo variant
 This returns an ApiResponse object which contains the response data, status code and headers.
 
 ```csharp
 try
 {
-    // Outbound API used by MDES to notify the Token Requestor of significant Token updates, such as when the Token is activated, suspended, unsuspended or deleted; or when information about the Token or its product configuration has changed.
-    ApiResponse<NotifyTokenUpdatedResults> response = apiInstance.NotifyTokenUpdateForTokenStateChangeWithHttpInfo(notifyTokenUpdated);
+    // Notify the Issuer of significant token updates, such as when the token is suspended, unsuspended or deleted.
+    ApiResponse<NotifyTokenUpdatedResponseSchema> response = apiInstance.NotifyTokenUpdatedWithHttpInfo(notifyTokenUpdatedRequestSchema);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
 }
 catch (ApiException e)
 {
-    Debug.Print("Exception when calling NotifyTokenUpdatedApi.NotifyTokenUpdateForTokenStateChangeWithHttpInfo: " + e.Message);
+    Debug.Print("Exception when calling NotifyTokenUpdatedApi.NotifyTokenUpdatedWithHttpInfo: " + e.Message);
     Debug.Print("Status Code: " + e.ErrorCode);
     Debug.Print(e.StackTrace);
 }
@@ -74,11 +74,11 @@ catch (ApiException e)
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **notifyTokenUpdated** | [**NotifyTokenUpdated**](NotifyTokenUpdated.md) | Notify Token Updated request |  |
+| **notifyTokenUpdatedRequestSchema** | [**NotifyTokenUpdatedRequestSchema**](NotifyTokenUpdatedRequestSchema.md) | Contains the details of the request message. |  |
 
 ### Return type
 
-[**NotifyTokenUpdatedResults**](NotifyTokenUpdatedResults.md)
+[**NotifyTokenUpdatedResponseSchema**](NotifyTokenUpdatedResponseSchema.md)
 
 ### Authorization
 
@@ -93,7 +93,8 @@ No authorization required
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Notify Token Updated response |  -  |
+| **200** | Contains the details of the response message. |  -  |
+| **0** | unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

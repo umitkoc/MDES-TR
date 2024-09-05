@@ -1,15 +1,14 @@
-# Org.OpenAPITools.Model.Token
+# Acme.App.MastercardApi.Client.Model.Token
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**TokenUniqueReference** | **string** | The unique reference allocated to the Token which is always present even if an error occurs.  | [optional] 
-**Status** | **string** | The current status of Token. Must be either:  * &#39;INACTIVE&#39; (Token has not yet been activated)  * &#39;ACTIVE&#39; (Token is active and ready to transact)  * &#39;SUSPENDED&#39; (Token is suspended and unable to transact)  * &#39;DEACTIVATED&#39; (Token has been permanently deactivated).  | [optional] 
-**SuspendedBy** | **List&lt;string&gt;** | (CONDITIONAL only supplied if status is SUSPENDED) Who or what caused the Token to be suspended One or more values of:    * ISSUER - Suspended by the Issuer.    * TOKEN_REQUESTOR - Suspended by the Token Requestor    * MOBILE_PIN_LOCKED - Suspended due to the Mobile PIN being locked    * CARDHOLDER - Suspended by the Cardholder  | [optional] 
-**StatusTimestamp** | **string** | The date and time the token status was last updated. Expressed in ISO 8601 extended format as one of the following:    * YYYY-MM-DDThh:mm:ss[.sss]Z    * YYYY-MM-DDThh:mm:ss[.sss]±hh:mm    * Where [.sss] is optional and can be 1 to 3 digits.  | [optional] 
-**ProductConfig** | [**ProductConfig**](ProductConfig.md) |  | [optional] 
-**TokenInfo** | [**TokenInfo**](TokenInfo.md) |  | [optional] 
+**tokenUniqueReference** | **string** | A unique reference assigned following the allocation of a token used to identify the token for the duration of its lifetime. Note; It is required to be always present, even when an error occurs. | 
+**status** | **string** | The current status of token. Conditional - required for notifyTokenUpdated if reasonCode &#x3D; \&quot;STATUS_UPDATE\&quot;. Not present otherwise. Must be one of;  * INACTIVE - Token has not yet been activated,  * ACTIVE - Token is active and ready to transact, * SUSPENDED - Token is suspended and unable to transact,  * DEACTIVATED - Token has been permanently deactivated.   | [optional] 
+**suspendedBy** | **List&lt;string&gt;** | Who or what caused the token to be suspended. Conditional - required if status &#x3D; SUSPENDED.  One or more values of;  * ISSUER &#x3D; Suspended by the Issuer. PaymentAppProvider unable to unsuspend this token,  * PAYMENT_APP_PROVIDER (Deprecated) &#x3D; Suspended by the PaymentAppProvider, * TOKEN_REQUESTOR &#x3D; Suspended by the Token Requestor,   * MOBILE_PIN_LOCKED &#x3D; Suspended  due to the Mobile PIN being locked, * CARDHOLDER &#x3D; Suspended by the Cardholder.    | [optional] 
+**tokenExpiry** | **string** | The expiry of the Token PAN given in MMYY format. Conditional - Required for notifyTokenUpdated if reasonCode &#x3D; \&quot;REDIGITIZATION_COMPLETE\&quot;. Not present otherwise. | [optional] 
+**fundingAccountInfo** | [**FundingAccountInfoSchemaForNTU**](FundingAccountInfoSchemaForNTU.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -164,12 +164,9 @@ namespace form
         private void GetAssetBtn_Click(object sender, EventArgs e)
         {
             var getAssetApi = new GetAssetApi { Client = client };
-            // var requestBody = new GetAsset
             TransactResults responseBody;
             try
             {
-                // requestText.Text = JsonSerializer.Serialize(requestBody);
-                // responseBody = getAssetApi.cre(requestBody);
                 responseText.Text = JsonSerializer.Serialize(Asset);
             }
             catch (Exception ex)
@@ -349,24 +346,30 @@ namespace form
         private void GetTokenBtn_Click(object sender, EventArgs e)
         {
             var getTaskStatusApi = new GetTokenApi { Client = client };
-            var requestBody = new GetTaskStatus()
+            var requestBody = new GetToken()
             {
                 RequestId = "",
                 ResponseHost = "",
-                TaskId = "",
-                TokenRequestorId = ""
+                IncludeTokenDetail = "",
+                PaymentAppInstanceId = "",
+                TokenUniqueReference = ""
             };
-            GetTaskStatusResults responseBody;
+            GetTokenResults responseBody;
             try
             {
                 requestText.Text = JsonSerializer.Serialize(requestBody);
-                responseBody = getTaskStatusApi.GetTaskStatus(requestBody);
+                responseBody = getTaskStatusApi.GetToken(requestBody);
                 responseText.Text = JsonSerializer.Serialize(responseBody);
             }
             catch (Exception ex)
             {
                 responseText.Text = ex.Message.ToString();
             }
+        }
+
+        private void DigitazeBtn_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

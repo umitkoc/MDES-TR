@@ -78,6 +78,7 @@
             DigitazeBtn.TabIndex = 3;
             DigitazeBtn.Text = "Digitaze";
             DigitazeBtn.UseVisualStyleBackColor = true;
+            DigitazeBtn.Click += DigitazeBtn_Click;
             // 
             // TransactBtn
             // 
