@@ -1,0 +1,9 @@
+openssl pkcs12 -in MDES-TR-sandbox-signing.p12 -nocerts -out private_key.pem
+openssl pkcs12 -in MDES-TR-sandbox-signing.p12 -clcerts -nokeys -out certificate.pem
+openssl x509 -outform der -in certificate.pem -out certificate.crt
+openssl pkcs12 -in MDES-TR-sandbox-signing.p12 -nocerts -out private.key -nodes
+
+
+https://developer.mastercard.com/platform/documentation/security-and-authentication/generating-and-configuring-a-mastercard-api-client/
+
+
