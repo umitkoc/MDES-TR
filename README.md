@@ -1,4 +1,4 @@
-# Org.OpenAPITools - the C# library for the Mastercard Digital Enablement API
+# Org.OpenAPITools - the C# library for the Mastercard Digital Enablement - TR API
 
 The Mastercard Digital Enablement API encompasses a set of APIs that are initiated by the Token Requestor for the purposes of creating and managing the life cycle of a token.     
 **Authentication**
