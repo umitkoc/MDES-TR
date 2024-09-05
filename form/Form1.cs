@@ -23,11 +23,11 @@ namespace form
         private const string certificatePassword = "Panda1881";
         private const string clientID = "3rxtyb4-tHOAeFEzRyZ-AdheWOdac4sM3HhhRXjWd8c04fdd";
         private const string consumerKey = "3rxtyb4-tHOAeFEzRyZ-AdheWOdac4sM3HhhRXjWd8c04fdd!e6f7540a297e47d0bfc2608a86e1409a0000000000000000";
-        private X509Certificate2 encryptionCertificate;
-        private System.Security.Cryptography.RSA decryptionKey;
-        private X509Certificate2 certificate;
-        private HttpClientHandler handler = new HttpClientHandler();
-        private FormUrlEncodedContent content;
+        private readonly X509Certificate2 encryptionCertificate;
+        private readonly System.Security.Cryptography.RSA decryptionKey;
+        private readonly X509Certificate2 certificate;
+        private readonly HttpClientHandler handler;
+        private readonly FormUrlEncodedContent content;
         private readonly FieldLevelEncryptionConfig config;
         private readonly System.Security.Cryptography.RSA signingKey;
         private readonly ApiClient client;
@@ -35,6 +35,8 @@ namespace form
         public Form1()
         {
             InitializeComponent();
+            handler = new HttpClientHandler();
+            Asset = new ProductConfig();
             encryptionCertificate = EncryptionUtils.LoadEncryptionCertificate(certificatePathPEM);
             decryptionKey = EncryptionUtils.LoadDecryptionKey(certificatePath, certificatePassword, certificatePassword);
             config = FieldLevelEncryptionConfigBuilder.AFieldLevelEncryptionConfig()
@@ -134,7 +136,7 @@ namespace form
             {
                 EncryptedData = new NotifyTokenEncryptedPayload()
                 {
-                    Tokens = new List<TokenForNTU>() { }
+                    Tokens = []
                 },
                 EncryptedKey = "",
                 Iv = "00000000000000000000000000000000",
@@ -164,7 +166,6 @@ namespace form
         private void GetAssetBtn_Click(object sender, EventArgs e)
         {
             var getAssetApi = new GetAssetApi { Client = client };
-            TransactResults responseBody;
             try
             {
                 responseText.Text = JsonSerializer.Serialize(Asset);
@@ -186,7 +187,7 @@ namespace form
                 PaymentAppInstanceId = "",
                 Reason = "",
                 ReasonCode = "",
-                TokenUniqueReferences = new List<string> { }
+                TokenUniqueReferences = []
             };
             SuspendResults responseBody;
             try
@@ -212,7 +213,7 @@ namespace form
                 PaymentAppInstanceId = "",
                 Reason = "",
                 ReasonCode = "",
-                TokenUniqueReferences = new List<string> { }
+                TokenUniqueReferences = []
             };
             UnSuspendResults responseBody;
             try
@@ -238,7 +239,7 @@ namespace form
                 PaymentAppInstanceId = "",
                 Reason = "",
                 ReasonCode = "",
-                TokenUniqueReferences = new List<string> { }
+                TokenUniqueReferences = []
             };
             DeleteResults responseBody;
             try
@@ -317,7 +318,7 @@ namespace form
                 OaepHashingAlgorithm = "",
                 PublicKeyFingerprint = ""
             };
-            FundingAccountInfo accountInfo = new FundingAccountInfo()
+            FundingAccountInfo accountInfo = new ()
             {
                 EncryptedPayload = payload,
                 PanUniqueReference = "",
