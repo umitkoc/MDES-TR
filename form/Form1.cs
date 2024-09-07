@@ -16,7 +16,6 @@ namespace form
 {
     public partial class Form1 : Form
     {
-
         private const string basePath = "https://sandbox.api.mastercard.com/mdes";
         private const string certificatePath = "C:\\certificates\\MDES-TR-sandbox-signing.p12";
         private const string certificatePathPEM = "C:\\certificates\\certificate.pem";
@@ -57,7 +56,7 @@ namespace form
             client = new ApiClient(signingKey, basePath, consumerKey, config);
         }
 
-        private void tokenizeBtn_Click(object sender, EventArgs e)
+        private void TokenizeBtn_Click(object sender, EventArgs e)
         {
 
             var tokenizeApi = new TokenizeApi { Client = client };
@@ -131,7 +130,7 @@ namespace form
         {
 
             var notifyTokenUpdatedApi = new NotifyTokenUpdatedApi { Client = client };
-            EncryptedPayload payload = new EncryptedPayload()
+            EncryptedPayload payload = new()
             {
                 EncryptedData = new NotifyTokenEncryptedPayload()
                 {
@@ -369,7 +368,7 @@ namespace form
 
         private void DigitazeBtn_Click(object sender, EventArgs e)
         {
-
+         
 
         }
 
@@ -500,33 +499,37 @@ namespace form
 
         private void AuthorizeServiceBtn_Click(object sender, EventArgs e)
         {
-            var authorizeServiceApi=new AuthorizeServiceApi() { Client=client};
+            var authorizeServiceApi = new AuthorizeServiceApi() { Client = client };
             var requestBody = new AuthorizeServiceRequestSchema()
             {
                 correlationId = "",
                 requestId = "",
-                accountIdHash="",
-                activeTokenCount="",
-                chipDataValidationResult="",
-                consumerFacingEntityName="",
-                deviceInfo=new DeviceInfo()
+                accountIdHash = "",
+                activeTokenCount = "",
+                chipDataValidationResult = new ChipDataValidationResult()
                 {
-                    cardCaptureTechnology="",
-                    deviceName="",
-                    formFactor="",
-                    imei="",
-                    isoDeviceType="",
-                    msisdn="",
-                    osName="",
-                    osVersion="",
+                    oBSResult = "",
+                    oBSServiceIndicator = ""
+                },
+                consumerFacingEntityName = "",
+                deviceInfo = new DeviceInfo()
+                {
+                    cardCaptureTechnology = "",
+                    deviceName = "",
+                    formFactor = "",
+                    imei = "",
+                    isoDeviceType = "",
+                    msisdn = "",
+                    osName = "",
+                    osVersion = "",
                     paymentTypes = [],
-                    serialNumber="",
-                    storageTechnology=""
+                    serialNumber = "",
+                    storageTechnology = ""
 
                 },
-                fundingAccountInfo=new FundingAccountInfoSchema1()
+                fundingAccountInfo = new FundingAccountInfoSchema1()
                 {
-                    encryptedPayload=new EncryptedPayloadIn()
+                    encryptedPayload = new EncryptedPayloadIn()
                     {
                         encryptedData = new FundingAccountDataSchema()
                         {
@@ -560,32 +563,110 @@ namespace form
                         oaepHashingAlgorithm = "",
                         publicKeyFingerprint = ""
                     },
-                    panUniqueReference="",
-                    tokenUniqueReference=""
+                    panUniqueReference = "",
+                    tokenUniqueReference = ""
                 },
-                mobileNumberSuffix="",
-                panSequenceNumber="",
-                paymentAppInstanceId="",
+                mobileNumberSuffix = "",
+                panSequenceNumber = "",
+                paymentAppInstanceId = "",
                 services = [],
-                tokenRequestorId="",
-                tokenType="",
-                walletId="",
-              walletProviderDecisioningInfo=new WalletProviderDecisioningInfo()
-              {
-                  accountLifeTime="",
-                  accountScore="",
-                  phoneNumberScore="",
-                  deviceScore="",
-                  recommendationReasons = [],
-                  recommendationStandardVersion="",
-                  recommendedDecision=""
-              }  
+                tokenRequestorId = "",
+                tokenType = "",
+                walletId = "",
+                walletProviderDecisioningInfo = new WalletProviderDecisioningInfo()
+                {
+                    accountLifeTime = "",
+                    accountScore = "",
+                    phoneNumberScore = "",
+                    deviceScore = "",
+                    recommendationReasons = [],
+                    recommendationStandardVersion = "",
+                    recommendedDecision = ""
+                }
             };
             AuthorizeServiceResponseSchema responseBody;
             try
             {
                 requestText.Text = JsonSerializer.Serialize(requestBody);
                 responseBody = authorizeServiceApi.AuthorizeService(requestBody);
+                responseText.Text = JsonSerializer.Serialize(responseBody);
+            }
+            catch (Exception ex)
+            {
+                responseText.Text = ex.Message.ToString();
+            }
+        }
+
+        private void NotifyServiceActivatedBtn_Click(object sender, EventArgs e)
+        {
+            var notifyServiceActivatedApi = new NotifyServiceActivatedApi() { Client = client };
+            var requestBody = new NotifyServiceActivatedRequestSchema()
+            {
+                accountPanSuffix = "",
+                consumerFacingEntityName = "",
+                consumerLanguage = "",
+                correlationId = "",
+                decision = "",
+                decisionMadeBy = "",
+                fundingAccountInfo = new FundingAccountInfoSchema2()
+                {
+                    encryptedPayload = new EncryptedPayloadIn()
+                    {
+                        encryptedData = new FundingAccountDataSchema()
+                        {
+                            accountHolderData = new AccountHolderDataSchema()
+                            {
+                                accountHolderAddress = new BillingAddressSchema()
+                                {
+                                    city = "",
+                                    country = "",
+                                    countrySubdivision = "",
+                                    line1 = "",
+                                    line2 = "",
+                                    postalCode = ""
+                                },
+                                accountHolderEmailAddress = "",
+                                accountHolderMobilePhoneNumber = new PhoneNumberSchema()
+                                {
+                                    countryDialInCode = "",
+                                    phoneNumber = ""
+                                },
+                                accountHolderName = "",
+                                consumerIdentifier = "",
+                                deviceLocation = "",
+                                sourceIp = ""
+                            },
+
+                        },
+                        encryptedKey = "",
+                        iv = "",
+                        oaepHashingAlgorithm = "",
+                        publicKeyFingerprint = ""
+                    },
+                    panUniqueReference = "",
+                    tokenUniqueReference = ""
+                },
+                deviceInfo = new DeviceInfo()
+                {
+                    cardCaptureTechnology = "",
+                    deviceName = "",
+                    formFactor = "",
+                    imei = "",
+                    isoDeviceType = "",
+                    msisdn = "",
+                    osName = "",
+                    osVersion = "",
+                    paymentTypes = [],
+                    serialNumber = "",
+                    storageTechnology = ""
+                },
+
+            };
+            NotifyServiceActivatedResponseSchema responseBody;
+            try
+            {
+                requestText.Text = JsonSerializer.Serialize(requestBody);
+                responseBody = notifyServiceActivatedApi.NotifyServiceActivated(requestBody);
                 responseText.Text = JsonSerializer.Serialize(responseBody);
             }
             catch (Exception ex)
