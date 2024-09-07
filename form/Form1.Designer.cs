@@ -44,12 +44,15 @@
             DeliverAuthenticationCodeBtn = new Button();
             DeliverActivationCodeBtn = new Button();
             groupBox1 = new GroupBox();
+            RequestActivationMethodsBtn = new Button();
+            NotifyServiceActivatedBtn = new Button();
             AuthorizeServiceBtn = new Button();
             groupBox2 = new GroupBox();
             ValidateActivationCodeBtn = new Button();
-            NotifyServiceActivatedBtn = new Button();
             groupBox3 = new GroupBox();
+            GetAccountInformationBtn = new Button();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            NotifySuspiciousEventsBtn = new Button();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
@@ -57,7 +60,7 @@
             // 
             // tokenizeBtn
             // 
-            tokenizeBtn.Location = new Point(6, 87);
+            tokenizeBtn.Location = new Point(6, 137);
             tokenizeBtn.Name = "tokenizeBtn";
             tokenizeBtn.Size = new Size(159, 46);
             tokenizeBtn.TabIndex = 0;
@@ -84,7 +87,7 @@
             // DigitazeBtn
             // 
             DigitazeBtn.Enabled = false;
-            DigitazeBtn.Location = new Point(6, 35);
+            DigitazeBtn.Location = new Point(6, 85);
             DigitazeBtn.Name = "DigitazeBtn";
             DigitazeBtn.Size = new Size(159, 46);
             DigitazeBtn.TabIndex = 3;
@@ -94,7 +97,7 @@
             // 
             // TransactBtn
             // 
-            TransactBtn.Location = new Point(6, 139);
+            TransactBtn.Location = new Point(6, 189);
             TransactBtn.Name = "TransactBtn";
             TransactBtn.Size = new Size(159, 46);
             TransactBtn.TabIndex = 4;
@@ -104,7 +107,7 @@
             // 
             // NotifyTokenUpdatedBtn
             // 
-            NotifyTokenUpdatedBtn.Location = new Point(6, 191);
+            NotifyTokenUpdatedBtn.Location = new Point(6, 241);
             NotifyTokenUpdatedBtn.Name = "NotifyTokenUpdatedBtn";
             NotifyTokenUpdatedBtn.Size = new Size(159, 46);
             NotifyTokenUpdatedBtn.TabIndex = 5;
@@ -124,7 +127,7 @@
             // 
             // GetAssetBtn
             // 
-            GetAssetBtn.Location = new Point(6, 243);
+            GetAssetBtn.Location = new Point(6, 234);
             GetAssetBtn.Name = "GetAssetBtn";
             GetAssetBtn.Size = new Size(159, 46);
             GetAssetBtn.TabIndex = 6;
@@ -204,16 +207,38 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(RequestActivationMethodsBtn);
             groupBox1.Controls.Add(NotifyServiceActivatedBtn);
             groupBox1.Controls.Add(AuthorizeServiceBtn);
             groupBox1.Controls.Add(DeliverAuthenticationCodeBtn);
             groupBox1.Controls.Add(DeliverActivationCodeBtn);
-            groupBox1.Location = new Point(457, 531);
+            groupBox1.Controls.Add(GetAssetBtn);
+            groupBox1.Location = new Point(457, 370);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(200, 251);
+            groupBox1.Size = new Size(200, 412);
             groupBox1.TabIndex = 17;
             groupBox1.TabStop = false;
             groupBox1.Text = "Send to Issuer";
+            // 
+            // RequestActivationMethodsBtn
+            // 
+            RequestActivationMethodsBtn.Location = new Point(6, 286);
+            RequestActivationMethodsBtn.Name = "RequestActivationMethodsBtn";
+            RequestActivationMethodsBtn.Size = new Size(159, 46);
+            RequestActivationMethodsBtn.TabIndex = 10;
+            RequestActivationMethodsBtn.Text = "Request Activation Methods";
+            RequestActivationMethodsBtn.UseVisualStyleBackColor = true;
+            RequestActivationMethodsBtn.Click += RequestActivationMethodsBtn_Click;
+            // 
+            // NotifyServiceActivatedBtn
+            // 
+            NotifyServiceActivatedBtn.Location = new Point(6, 182);
+            NotifyServiceActivatedBtn.Name = "NotifyServiceActivatedBtn";
+            NotifyServiceActivatedBtn.Size = new Size(159, 46);
+            NotifyServiceActivatedBtn.TabIndex = 20;
+            NotifyServiceActivatedBtn.Text = "Notify Service Activated";
+            NotifyServiceActivatedBtn.UseVisualStyleBackColor = true;
+            NotifyServiceActivatedBtn.Click += NotifyServiceActivatedBtn_Click;
             // 
             // AuthorizeServiceBtn
             // 
@@ -227,6 +252,7 @@
             // 
             // groupBox2
             // 
+            groupBox2.Controls.Add(GetAccountInformationBtn);
             groupBox2.Controls.Add(ValidateActivationCodeBtn);
             groupBox2.Controls.Add(GetTokenBtn);
             groupBox2.Controls.Add(tokenizeBtn);
@@ -234,20 +260,19 @@
             groupBox2.Controls.Add(TransactBtn);
             groupBox2.Controls.Add(NotifyTokenUpdatedBtn);
             groupBox2.Controls.Add(SearchTokensBtn);
-            groupBox2.Controls.Add(GetAssetBtn);
             groupBox2.Controls.Add(GetTaskStatusBtn);
             groupBox2.Controls.Add(SuspendBtn);
             groupBox2.Controls.Add(UnsuspendBtn);
             groupBox2.Location = new Point(12, 152);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(188, 607);
+            groupBox2.Size = new Size(188, 612);
             groupBox2.TabIndex = 18;
             groupBox2.TabStop = false;
             groupBox2.Text = "Tokenize From MDES-TR";
             // 
             // ValidateActivationCodeBtn
             // 
-            ValidateActivationCodeBtn.Location = new Point(6, 553);
+            ValidateActivationCodeBtn.Location = new Point(6, 555);
             ValidateActivationCodeBtn.Name = "ValidateActivationCodeBtn";
             ValidateActivationCodeBtn.Size = new Size(159, 46);
             ValidateActivationCodeBtn.TabIndex = 19;
@@ -255,18 +280,9 @@
             ValidateActivationCodeBtn.UseVisualStyleBackColor = true;
             ValidateActivationCodeBtn.Click += ValidateActivationCodeBtn_Click;
             // 
-            // NotifyServiceActivatedBtn
-            // 
-            NotifyServiceActivatedBtn.Location = new Point(6, 182);
-            NotifyServiceActivatedBtn.Name = "NotifyServiceActivatedBtn";
-            NotifyServiceActivatedBtn.Size = new Size(159, 46);
-            NotifyServiceActivatedBtn.TabIndex = 20;
-            NotifyServiceActivatedBtn.Text = "Notify Service Activated";
-            NotifyServiceActivatedBtn.UseVisualStyleBackColor = true;
-            NotifyServiceActivatedBtn.Click += NotifyServiceActivatedBtn_Click;
-            // 
             // groupBox3
             // 
+            groupBox3.Controls.Add(NotifySuspiciousEventsBtn);
             groupBox3.Controls.Add(DeleteBtn);
             groupBox3.Location = new Point(254, 538);
             groupBox3.Name = "groupBox3";
@@ -274,6 +290,26 @@
             groupBox3.TabIndex = 19;
             groupBox3.TabStop = false;
             groupBox3.Text = "From Issuer";
+            // 
+            // GetAccountInformationBtn
+            // 
+            GetAccountInformationBtn.Location = new Point(6, 33);
+            GetAccountInformationBtn.Name = "GetAccountInformationBtn";
+            GetAccountInformationBtn.Size = new Size(159, 46);
+            GetAccountInformationBtn.TabIndex = 20;
+            GetAccountInformationBtn.Text = "Get Account Information";
+            GetAccountInformationBtn.UseVisualStyleBackColor = true;
+            GetAccountInformationBtn.Click += GetAccountInformationBtn_Click;
+            // 
+            // NotifySuspiciousEventsBtn
+            // 
+            NotifySuspiciousEventsBtn.Location = new Point(6, 74);
+            NotifySuspiciousEventsBtn.Name = "NotifySuspiciousEventsBtn";
+            NotifySuspiciousEventsBtn.Size = new Size(159, 46);
+            NotifySuspiciousEventsBtn.TabIndex = 10;
+            NotifySuspiciousEventsBtn.Text = "Notify Suspicious Events";
+            NotifySuspiciousEventsBtn.UseVisualStyleBackColor = true;
+            NotifySuspiciousEventsBtn.Click += NotifySuspiciousEventsBtn_Click;
             // 
             // Form1
             // 
@@ -318,5 +354,8 @@
         private Button NotifyServiceActivatedBtn;
         private GroupBox groupBox3;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private Button RequestActivationMethodsBtn;
+        private Button GetAccountInformationBtn;
+        private Button NotifySuspiciousEventsBtn;
     }
 }

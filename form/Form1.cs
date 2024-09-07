@@ -366,11 +366,7 @@ namespace form
             }
         }
 
-        private void DigitazeBtn_Click(object sender, EventArgs e)
-        {
-         
 
-        }
 
 
         private void DeliverAuthenticationCodeBtn_Click(object sender, EventArgs e)
@@ -667,6 +663,183 @@ namespace form
             {
                 requestText.Text = JsonSerializer.Serialize(requestBody);
                 responseBody = notifyServiceActivatedApi.NotifyServiceActivated(requestBody);
+                responseText.Text = JsonSerializer.Serialize(responseBody);
+            }
+            catch (Exception ex)
+            {
+                responseText.Text = ex.Message.ToString();
+            }
+        }
+        private void DigitazeBtn_Click(object sender, EventArgs e)
+        {
+
+
+        }
+
+        private void RequestActivationMethodsBtn_Click(object sender, EventArgs e)
+        {
+            var requestActivationMethodsApi = new RequestActivationMethodsApi() { Client = client };
+            var requestBody = new RequestActivationMethodsRequestSchema()
+            {
+                correlationId = "",
+                requestId = "",
+                accountIdHash = "",
+                consumerFacingEntityName = "",
+                fundingAccountInfo = new FundingAccountInfoSchema1()
+                {
+                    encryptedPayload = new EncryptedPayloadIn()
+                    {
+                        encryptedData = new FundingAccountDataSchema()
+                        {
+                            accountHolderData = new AccountHolderDataSchema()
+                            {
+                                sourceIp = "issuer ip",
+                                accountHolderAddress = new BillingAddressSchema()
+                                {
+                                    city = "",
+                                    country = "",
+                                    countrySubdivision = "",
+                                    line1 = "",
+                                    line2 = "",
+                                    postalCode = ""
+
+                                },
+                                accountHolderEmailAddress = "",
+                                accountHolderMobilePhoneNumber = new PhoneNumberSchema()
+                                {
+                                    countryDialInCode = "",
+                                    phoneNumber = ""
+                                },
+                                accountHolderName = "",
+                                consumerIdentifier = "",
+                                deviceLocation = ""
+
+                            }
+                        },
+                        encryptedKey = "",
+                        iv = "",
+                        oaepHashingAlgorithm = "",
+                        publicKeyFingerprint = ""
+
+                    },
+                    panUniqueReference = "",
+                    tokenUniqueReference = ""
+                },
+                mobileNumberSuffix = "",
+                paymentAppInstanceId = "",
+                reasonCodes = [],
+                services = [],
+                tokenRequestorId = "",
+                tokenType = "",
+                walletId = ""
+            };
+            RequestActivationMethodsResponseSchema responseBody;
+            try
+            {
+                requestText.Text = JsonSerializer.Serialize(requestBody);
+                responseBody = requestActivationMethodsApi.RequestForActivationMethods(requestBody);
+                responseText.Text = JsonSerializer.Serialize(responseBody);
+            }
+            catch (Exception ex)
+            {
+                responseText.Text = ex.Message.ToString();
+            }
+        }
+
+        private void GetAccountInformationBtn_Click(object sender, EventArgs e)
+        {
+            var getAccountInformationApi = new GetAccountInformationApi() { Client = client };
+            var requestBody = new GetAccountInformationRequestSchema()
+            {
+                requestId = "",
+                fundingAccountInfo = new FundingAccountInfoSchema1()
+                {
+                    encryptedPayload = new EncryptedPayloadIn()
+                    {
+                        encryptedData = new FundingAccountDataSchema()
+                        {
+                            accountHolderData = new AccountHolderDataSchema()
+                            {
+                                sourceIp = "issuer ip",
+                                accountHolderAddress = new BillingAddressSchema()
+                                {
+                                    city = "",
+                                    country = "",
+                                    countrySubdivision = "",
+                                    line1 = "",
+                                    line2 = "",
+                                    postalCode = ""
+
+                                },
+                                accountHolderEmailAddress = "",
+                                accountHolderMobilePhoneNumber = new PhoneNumberSchema()
+                                {
+                                    countryDialInCode = "",
+                                    phoneNumber = ""
+                                },
+                                accountHolderName = "",
+                                consumerIdentifier = "",
+                                deviceLocation = ""
+
+                            }
+                        },
+                        encryptedKey = "",
+                        iv = "",
+                        oaepHashingAlgorithm = "",
+                        publicKeyFingerprint = ""
+
+                    },
+                    panUniqueReference = "",
+                    tokenUniqueReference = ""
+                },
+
+            };
+            GetAccountInformationResponseSchema responseBody;
+            try
+            {
+                requestText.Text = JsonSerializer.Serialize(requestBody);
+                responseBody = getAccountInformationApi.GetAccountInformation(requestBody);
+                responseText.Text = JsonSerializer.Serialize(responseBody);
+            }
+            catch (Exception ex)
+            {
+                responseText.Text = ex.Message.ToString();
+            }
+        }
+
+        private void NotifySuspiciousEventsBtn_Click(object sender, EventArgs e)
+        {
+            var notifySuspiciousEventsApi=new NotifySuspiciousEventsApi() { Client=client};
+            var requestBody = new NotifySuspiciousEventsRequestSchema()
+            {
+                requestId = "",
+                events=new SuspiciousEvent()
+                {
+                    eventName="",
+                    systemAtcStatus=new SystemAtcStatus()
+                    {
+                        unusedActive = [],
+                        atcAlreadyProcessed = [],
+                        atcNotFound = [],
+                        atcReportedUsedByWallet = []
+                    },
+                    walletAtcStatus=new WalletAtcStatus()
+                    {
+                        unusedActive=[],
+                        unusedDiscarded = [],
+                        usedForContactless = [],
+                        usedForDsrp = []
+                    }
+                },
+                paymentAppInstanceId="",
+                status="",
+                tokenUniqueReference=""
+            };
+            NotifySuspiciousEventsResponseSchema responseBody;
+            try
+            {
+                requestText.Text = JsonSerializer.Serialize(requestBody);
+                responseBody = notifySuspiciousEventsApi.NotifySuspiciousEvents(requestBody);
                 responseText.Text = JsonSerializer.Serialize(responseBody);
             }
             catch (Exception ex)
