@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Mastercard.Developer.ClientEncryption.RestSharpV2" Version="1.9.1" />
+    <PackageReference Include="Mastercard.Developer.OAuth1Signer.RestSharpV2" Version="1.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\src\Org.OpenAPITools\Org.OpenAPITools.csproj" />
+  </ItemGroup>
+
+</Project>

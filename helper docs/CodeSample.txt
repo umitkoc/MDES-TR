@@ -1,0 +1,8 @@
+Authorization: OAuth
+    oauth_body_hash="94cOcstEzvTvyBcNV94PCbo1b5IA35XgPf5dWR4OamU=",
+    oauth_nonce="32lqGrI0f0nQEW85",
+    oauth_signature="MhfaStcHU0vlIoeaBLuP14(...)qqd99lI56XuCk8RM5dDA%3D%3D",
+    oauth_consumer_key="aXqayIybNdwMnzGIZMAkQYSq(...)139a87746d5b00000000000000",
+    oauth_signature_method="RSA-SHA256",
+    oauth_timestamp="1558370962",
+    oauth_version="1.0"
