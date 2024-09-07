@@ -30,7 +30,7 @@ namespace form
         private readonly FormUrlEncodedContent content;
         private readonly FieldLevelEncryptionConfig config;
         private readonly System.Security.Cryptography.RSA signingKey;
-        private readonly ApiClient client;
+        private ApiClient client;
         private ProductConfig Asset;
         public Form1()
         {
@@ -317,7 +317,7 @@ namespace form
                 OaepHashingAlgorithm = "",
                 PublicKeyFingerprint = ""
             };
-            FundingAccountInfo accountInfo = new ()
+            FundingAccountInfo accountInfo = new()
             {
                 EncryptedPayload = payload,
                 PanUniqueReference = "",
@@ -370,6 +370,109 @@ namespace form
         private void DigitazeBtn_Click(object sender, EventArgs e)
         {
 
+
+        }
+
+
+        private void DeliverAuthenticationCodeBtn_Click(object sender, EventArgs e)
+        {
+            client = new ApiClient(signingKey, basePath, consumerKey, config);
+            var deliverAuthenticationCodeApi = new DeliverAuthenticationCodeApi() { Client = client };
+            var requestBody = new DeliverAuthenticationCodeRequestSchema()
+            {
+                authenticationCode = "",
+                authenticationFlowId = "",
+                consumerFacingEntityName = "",
+                expirationDateTime = "",
+                fundingAccountInfo = new FundingAccountInfoSchema1()
+                {
+                    encryptedPayload = new EncryptedPayloadIn()
+                    {
+                        encryptedData = new FundingAccountDataSchema()
+                        {
+                            accountHolderData = new AccountHolderDataSchema()
+                            {
+                                sourceIp = "issuer ip",
+                                accountHolderAddress = new BillingAddressSchema()
+                                {
+                                    city = "",
+                                    country = "",
+                                    countrySubdivision = "",
+                                    line1 = "",
+                                    line2 = "",
+                                    postalCode = ""
+
+                                },
+                                accountHolderEmailAddress = "",
+                                accountHolderMobilePhoneNumber = new PhoneNumberSchema()
+                                {
+                                    countryDialInCode = "",
+                                    phoneNumber = ""
+                                },
+                                accountHolderName = "",
+                                consumerIdentifier = "",
+                                deviceLocation = ""
+
+                            }
+                        },
+                        encryptedKey = "",
+                        iv = "",
+                        oaepHashingAlgorithm = "",
+                        publicKeyFingerprint = ""
+
+                    },
+                    panUniqueReference = "",
+                    tokenUniqueReference = ""
+                },
+                paymentAppInstanceId = "",
+                paymentAppName = "",
+                reasonCode = "",
+                requestId = "",
+                tokenRequestorId = "",
+                walletId = ""
+            };
+            DeliverAuthenticationCodeResponseSchema responseBody;
+            try
+            {
+                requestText.Text = JsonSerializer.Serialize(requestBody);
+                responseBody = deliverAuthenticationCodeApi.DeliverAuthenticationCode(requestBody);
+                responseText.Text = JsonSerializer.Serialize(responseBody);
+            }
+            catch (Exception ex)
+            {
+                responseText.Text = ex.Message.ToString();
+            }
+        }
+
+        private void DeliverActivationCodeBtn_Click(object sender, EventArgs e)
+        {
+            var deliverActivationCodeApi = new DeliverActivationCodeApi() { Client = client };
+            var requestBody = new DeliverActivationCodeRequestSchema()
+            {
+                activationCode="",
+                activationMethod=new ActivationMethod()
+                {
+                    type="",
+                    value=""
+                },
+                consumerFacingEntityName="",
+                correlationId="",   
+                expirationDateTime="",
+                reasonCodes = [],
+                requestId="",
+                tokenUniqueReference=""
+            };
+            DeliverActivationCodeResponseSchema responseBody;
+            try
+            {
+                requestText.Text = JsonSerializer.Serialize(requestBody);
+                responseBody = deliverActivationCodeApi.DeliverActivationCode(requestBody);
+                responseText.Text = JsonSerializer.Serialize(responseBody);
+            }
+            catch (Exception ex)
+            {
+                responseText.Text = ex.Message.ToString();
+            }
         }
     }
 }

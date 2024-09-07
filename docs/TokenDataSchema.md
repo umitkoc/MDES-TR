@@ -1,14 +1,12 @@
-# Acme.App.MastercardApi.Client.Model.TokenDataSchema
-The token information. Max length - Not applicable. Conditional – required in NotifyServiceActivated, not present otherwise.
+# Org.OpenAPITools.Model.TokenDataSchema
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**token** | **string** | The token issued for this service request. | 
-**expiryMonth** | **string** | The month of the expiration date. | 
-**expiryYear** | **string** | The year of the expiration date. | 
-**sequenceNumber** | **string** | Sequence number of the Token. Conditional – required in AuthorizeServiceResponseData. Optional otherwise. | [optional] 
+**token** | **string** | The token of the account holder to be authenticated.&lt;br&gt;  __Max length - 19, min length - 12. Numeric characters only__ | 
+**expiryMonth** | **string** | The month of the token expiration date. &lt;br&gt;  __Length - exactly 2. Numeric characters only__ | 
+**expiryYear** | **string** | The year of the token expiration date. &lt;br&gt;  __Length - exactly 2. Numeric characters only__ | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

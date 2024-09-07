@@ -1,15 +1,14 @@
-# Acme.App.MastercardApi.Client.Model.EncryptedPayloadIn
-Contains an encrypted object. Data Type - EncryptedPayload object containing a FundingAccountData object. Max length - N/A.
+# Org.OpenAPITools.Model.EncryptedPayloadIn
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**publicKeyFingerprint** | **string** | The fingerprint of the public key used to encrypt the ephemeral AES key.&lt;br&gt;  __Max length - 64. Hex-encoded Data (case-insensitive)__ | 
+**encryptedKey** | **string** | One-time use AES key encrypted by the Mastercard public key as identified by &#39;publicKeyFingerprint&#39; using the OAEP or RSA Encryption Standard PKCS1 v1.5, depending on the value of &#39;oaepHashingAlgorithm&#39; specified during onboarding. Requirement is for a 128-bit key (with 256-bit key supported as an option). The Mastercard public key is provided by the issuer during onboarding through the mastercard developer interface.&lt;br&gt;  __Max length - 512. Hex-encoded Data (case-insensitive)__ | 
+**oaepHashingAlgorithm** | **string** | Hashing algorithm used with the OAEP scheme. Omitted, when the RSA Encryption Standard PKCS 1 v1.5 is used. Must be either  * SHA256 - Use the SHA-256 algorithm  * SHA512 - Use the SHA-512 algorithm. &lt;br&gt;  __Max length - 6__  | [optional] 
+**iv** | **string** | The initialization vector used when encrypting data using the one-time use AES key. Must be exactly 16 bytes (32 character hex string) to match the block size. If not present, an IV of zero is assumed. &lt;br&gt;  __Length - exactly 32. Hex-encoded Data (case-insensitive)__ | [optional] 
 **encryptedData** | [**FundingAccountDataSchema**](FundingAccountDataSchema.md) |  | 
-**publicKeyFingerprint** | **string** | The fingerprint of the public key used to encrypt the ephemeral AES key. Type - String Hex-encoded Data (case-insensitive). | 
-**encryptedKey** | **string** | One-time use AES key encrypted by the Mastercard public key (as identified by &#39;publicKeyFingerprint&#39;) using the OAEP or RSA Encryption Standard PKCS 1 v1.5 (depending on the value of &#39;oaepHashingAlgorithm&#39;). Requirement is for a 128-bit key (with 256-bit key supported as an option). Max length - 512. Type - String Hex-encoded Data (case-insensitive). | 
-**oaepHashingAlgorithm** | **string** | Hashing algorithm used with the OAEP scheme. If omitted, then the RSA Encryption Standard PKCS 1 v1.5 will be used. You must use one of the following algorithms; SHA256 - Use the SHA-256 algorithm | SHA512 - Use the SHA-512 algorithm. | [optional] 
-**iv** | **string** | The initialization vector used when encrypting data using the one-time use AES key. Must be exactly 16 bytes (32 character hex string) to match the block size. If not present, an IV of zero is assumed. Max length - 32 (exact). Type - String Hex-encoded Data (case-insensitive). | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

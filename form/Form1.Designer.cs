@@ -41,6 +41,8 @@
             GetTokenBtn = new Button();
             SearchTokensBtn = new Button();
             GetTaskStatusBtn = new Button();
+            DeliverAuthenticationCodeBtn = new Button();
+            DeliverActivationCodeBtn = new Button();
             SuspendLayout();
             // 
             // tokenizeBtn
@@ -170,11 +172,33 @@
             GetTaskStatusBtn.UseVisualStyleBackColor = true;
             GetTaskStatusBtn.Click += GetTaskStatusBtn_Click;
             // 
+            // DeliverAuthenticationCodeBtn
+            // 
+            DeliverAuthenticationCodeBtn.Location = new Point(247, 460);
+            DeliverAuthenticationCodeBtn.Name = "DeliverAuthenticationCodeBtn";
+            DeliverAuthenticationCodeBtn.Size = new Size(159, 46);
+            DeliverAuthenticationCodeBtn.TabIndex = 13;
+            DeliverAuthenticationCodeBtn.Text = "Deliver Authentication Code";
+            DeliverAuthenticationCodeBtn.UseVisualStyleBackColor = true;
+            DeliverAuthenticationCodeBtn.Click += DeliverAuthenticationCodeBtn_Click;
+            // 
+            // DeliverActivationCodeBtn
+            // 
+            DeliverActivationCodeBtn.Location = new Point(247, 512);
+            DeliverActivationCodeBtn.Name = "DeliverActivationCodeBtn";
+            DeliverActivationCodeBtn.Size = new Size(159, 46);
+            DeliverActivationCodeBtn.TabIndex = 14;
+            DeliverActivationCodeBtn.Text = "Deliver Activation Code";
+            DeliverActivationCodeBtn.UseVisualStyleBackColor = true;
+            DeliverActivationCodeBtn.Click += DeliverActivationCodeBtn_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1468, 794);
+            Controls.Add(DeliverActivationCodeBtn);
+            Controls.Add(DeliverAuthenticationCodeBtn);
             Controls.Add(GetTokenBtn);
             Controls.Add(SearchTokensBtn);
             Controls.Add(GetTaskStatusBtn);
@@ -209,5 +233,7 @@
         private Button GetTokenBtn;
         private Button SearchTokensBtn;
         private Button GetTaskStatusBtn;
+        private Button DeliverAuthenticationCodeBtn;
+        private Button DeliverActivationCodeBtn;
     }
 }
