@@ -369,7 +369,7 @@ namespace form
 
         private void DigitazeBtn_Click(object sender, EventArgs e)
         {
-
+            
 
         }
 

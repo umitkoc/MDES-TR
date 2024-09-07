@@ -1,0 +1,9 @@
+{ 
+    "targetFramework" : "netstandard2.1",
+    "packageName" : "Org.OpenAPITools",
+    "packageVersion" : "1.0.0",
+    "sourceFolder" : "",
+    "netCoreProjectFile": true,
+    "modelPropertyNaming":"camelCase",
+    "optionalAssemblyInfo": false
+} 

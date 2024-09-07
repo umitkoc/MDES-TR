@@ -43,11 +43,15 @@
             GetTaskStatusBtn = new Button();
             DeliverAuthenticationCodeBtn = new Button();
             DeliverActivationCodeBtn = new Button();
+            groupBox1 = new GroupBox();
+            groupBox2 = new GroupBox();
+            groupBox1.SuspendLayout();
+            groupBox2.SuspendLayout();
             SuspendLayout();
             // 
             // tokenizeBtn
             // 
-            tokenizeBtn.Location = new Point(12, 200);
+            tokenizeBtn.Location = new Point(6, 34);
             tokenizeBtn.Name = "tokenizeBtn";
             tokenizeBtn.Size = new Size(159, 46);
             tokenizeBtn.TabIndex = 0;
@@ -57,24 +61,24 @@
             // 
             // responseText
             // 
-            responseText.Location = new Point(777, 408);
+            responseText.Location = new Point(663, 408);
             responseText.Multiline = true;
             responseText.Name = "responseText";
-            responseText.Size = new Size(644, 374);
+            responseText.Size = new Size(758, 374);
             responseText.TabIndex = 1;
             // 
             // requestText
             // 
-            requestText.Location = new Point(777, 8);
+            requestText.Location = new Point(663, 8);
             requestText.Multiline = true;
             requestText.Name = "requestText";
-            requestText.Size = new Size(644, 394);
+            requestText.Size = new Size(758, 394);
             requestText.TabIndex = 2;
             // 
             // DigitazeBtn
             // 
             DigitazeBtn.Enabled = false;
-            DigitazeBtn.Location = new Point(12, 148);
+            DigitazeBtn.Location = new Point(12, 14);
             DigitazeBtn.Name = "DigitazeBtn";
             DigitazeBtn.Size = new Size(159, 46);
             DigitazeBtn.TabIndex = 3;
@@ -84,7 +88,7 @@
             // 
             // TransactBtn
             // 
-            TransactBtn.Location = new Point(12, 252);
+            TransactBtn.Location = new Point(6, 86);
             TransactBtn.Name = "TransactBtn";
             TransactBtn.Size = new Size(159, 46);
             TransactBtn.TabIndex = 4;
@@ -94,7 +98,7 @@
             // 
             // NotifyTokenUpdatedBtn
             // 
-            NotifyTokenUpdatedBtn.Location = new Point(12, 304);
+            NotifyTokenUpdatedBtn.Location = new Point(6, 138);
             NotifyTokenUpdatedBtn.Name = "NotifyTokenUpdatedBtn";
             NotifyTokenUpdatedBtn.Size = new Size(159, 46);
             NotifyTokenUpdatedBtn.TabIndex = 5;
@@ -104,7 +108,7 @@
             // 
             // SuspendBtn
             // 
-            SuspendBtn.Location = new Point(12, 408);
+            SuspendBtn.Location = new Point(6, 242);
             SuspendBtn.Name = "SuspendBtn";
             SuspendBtn.Size = new Size(159, 46);
             SuspendBtn.TabIndex = 7;
@@ -114,7 +118,7 @@
             // 
             // GetAssetBtn
             // 
-            GetAssetBtn.Location = new Point(12, 356);
+            GetAssetBtn.Location = new Point(6, 190);
             GetAssetBtn.Name = "GetAssetBtn";
             GetAssetBtn.Size = new Size(159, 46);
             GetAssetBtn.TabIndex = 6;
@@ -124,7 +128,7 @@
             // 
             // DeleteBtn
             // 
-            DeleteBtn.Location = new Point(12, 512);
+            DeleteBtn.Location = new Point(6, 346);
             DeleteBtn.Name = "DeleteBtn";
             DeleteBtn.Size = new Size(159, 46);
             DeleteBtn.TabIndex = 9;
@@ -134,7 +138,7 @@
             // 
             // UnsuspendBtn
             // 
-            UnsuspendBtn.Location = new Point(12, 460);
+            UnsuspendBtn.Location = new Point(6, 294);
             UnsuspendBtn.Name = "UnsuspendBtn";
             UnsuspendBtn.Size = new Size(159, 46);
             UnsuspendBtn.TabIndex = 8;
@@ -144,7 +148,7 @@
             // 
             // GetTokenBtn
             // 
-            GetTokenBtn.Location = new Point(12, 668);
+            GetTokenBtn.Location = new Point(6, 502);
             GetTokenBtn.Name = "GetTokenBtn";
             GetTokenBtn.Size = new Size(159, 46);
             GetTokenBtn.TabIndex = 12;
@@ -154,7 +158,7 @@
             // 
             // SearchTokensBtn
             // 
-            SearchTokensBtn.Location = new Point(12, 616);
+            SearchTokensBtn.Location = new Point(6, 450);
             SearchTokensBtn.Name = "SearchTokensBtn";
             SearchTokensBtn.Size = new Size(159, 46);
             SearchTokensBtn.TabIndex = 11;
@@ -164,7 +168,7 @@
             // 
             // GetTaskStatusBtn
             // 
-            GetTaskStatusBtn.Location = new Point(12, 564);
+            GetTaskStatusBtn.Location = new Point(6, 398);
             GetTaskStatusBtn.Name = "GetTaskStatusBtn";
             GetTaskStatusBtn.Size = new Size(159, 46);
             GetTaskStatusBtn.TabIndex = 10;
@@ -174,7 +178,7 @@
             // 
             // DeliverAuthenticationCodeBtn
             // 
-            DeliverAuthenticationCodeBtn.Location = new Point(247, 460);
+            DeliverAuthenticationCodeBtn.Location = new Point(6, 26);
             DeliverAuthenticationCodeBtn.Name = "DeliverAuthenticationCodeBtn";
             DeliverAuthenticationCodeBtn.Size = new Size(159, 46);
             DeliverAuthenticationCodeBtn.TabIndex = 13;
@@ -184,7 +188,7 @@
             // 
             // DeliverActivationCodeBtn
             // 
-            DeliverActivationCodeBtn.Location = new Point(247, 512);
+            DeliverActivationCodeBtn.Location = new Point(273, 434);
             DeliverActivationCodeBtn.Name = "DeliverActivationCodeBtn";
             DeliverActivationCodeBtn.Size = new Size(159, 46);
             DeliverActivationCodeBtn.TabIndex = 14;
@@ -192,28 +196,50 @@
             DeliverActivationCodeBtn.UseVisualStyleBackColor = true;
             DeliverActivationCodeBtn.Click += DeliverActivationCodeBtn_Click;
             // 
+            // groupBox1
+            // 
+            groupBox1.Controls.Add(DeliverAuthenticationCodeBtn);
+            groupBox1.Location = new Point(457, 408);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(200, 374);
+            groupBox1.TabIndex = 17;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Send to Issuer";
+            // 
+            // groupBox2
+            // 
+            groupBox2.Controls.Add(GetTokenBtn);
+            groupBox2.Controls.Add(tokenizeBtn);
+            groupBox2.Controls.Add(TransactBtn);
+            groupBox2.Controls.Add(NotifyTokenUpdatedBtn);
+            groupBox2.Controls.Add(SearchTokensBtn);
+            groupBox2.Controls.Add(GetAssetBtn);
+            groupBox2.Controls.Add(GetTaskStatusBtn);
+            groupBox2.Controls.Add(SuspendBtn);
+            groupBox2.Controls.Add(DeleteBtn);
+            groupBox2.Controls.Add(UnsuspendBtn);
+            groupBox2.Location = new Point(12, 221);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new Size(188, 561);
+            groupBox2.TabIndex = 18;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Tokenize From MDES-TR";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1468, 794);
+            Controls.Add(groupBox2);
+            Controls.Add(groupBox1);
             Controls.Add(DeliverActivationCodeBtn);
-            Controls.Add(DeliverAuthenticationCodeBtn);
-            Controls.Add(GetTokenBtn);
-            Controls.Add(SearchTokensBtn);
-            Controls.Add(GetTaskStatusBtn);
-            Controls.Add(DeleteBtn);
-            Controls.Add(UnsuspendBtn);
-            Controls.Add(SuspendBtn);
-            Controls.Add(GetAssetBtn);
-            Controls.Add(NotifyTokenUpdatedBtn);
-            Controls.Add(TransactBtn);
             Controls.Add(DigitazeBtn);
             Controls.Add(requestText);
             Controls.Add(responseText);
-            Controls.Add(tokenizeBtn);
             Name = "Form1";
             Text = "Form1";
+            groupBox1.ResumeLayout(false);
+            groupBox2.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -235,5 +261,7 @@
         private Button GetTaskStatusBtn;
         private Button DeliverAuthenticationCodeBtn;
         private Button DeliverActivationCodeBtn;
+        private GroupBox groupBox1;
+        private GroupBox groupBox2;
     }
 }

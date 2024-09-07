@@ -1,0 +1,332 @@
+openapi: 3.0.1
+info:
+  title: Authentication Facilitator API
+  description: This API provides our Issuer partners with authentication codes they
+    have to deliver to their cardholders.
+  contact:
+    name: API Support
+    url: https://developer.mastercard.com/support
+    email: apisupport@mastercard.com
+  version: "1.2"
+servers:
+- url: https://api.mastercard.com/
+  description: Production Server URL
+- url: https://api.mastercard.com/mtf
+  description: MTF Server URL
+tags:
+  - name: Deliver Authentication Code
+    description: Used to digitize a card to create a server-based Token.
+
+paths:
+  /deliverAuthenticationCode:
+    post:
+      x-mastercard-api-encrypted: true
+      tags:
+      - Deliver Authentication Code
+      summary: deliverAuthenticationCode is used to request an Authentication Code
+        be sent to authenticate the Account holder. Upon an Authentication Service
+        request, the Authentication Service generates an Authentication Code and delivers
+        it to the Issuer for transmission to the Account holder. The Issuer can choose
+        a default channel to transmit the code to the account holder. The account
+        holder will then enter the Authentication Code into the Authentication Service
+        client. Once an Authentication Code has been generated, it will be valid for
+        a limited period after which the code will expire. Once a code expires, there
+        is no means for an Issuer to request a new code. The account holder may request
+        the Authentication Code again. This will trigger another Deliver Authentication
+        Code request. If the current Authentication Code is still valid then the code
+        will not be regenerated nor the validity period extended. If the Code has
+        expired or too many attempts have failed validation then a new code will be
+        generated.
+      description: |
+        The apiName is 'deliverAuthenticationCode'. A Deliver Authentication Code message is used to notify an authentication code is to send to the account holder associated to the funding account information.
+      operationId: deliverAuthenticationCode
+      requestBody:
+        $ref: '#/components/requestBodies/DeliverAuthenticationCodeRequest'
+        
+      responses:
+        '200':
+          $ref: '#/components/responses/DeliverAuthenticationCodeResponse'
+        default:
+          $ref: '#/components/responses/ErrorsData'
+      
+components:
+  requestBodies:
+    DeliverAuthenticationCodeRequest:
+      required: true
+      description: Deliver Authentication Code request.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/deliverAuthenticationCodeRequestSchema"
+  responses:
+    DeliverAuthenticationCodeResponse: 
+      description: Deliver Authentication Code Response
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/deliverAuthenticationCodeResponseSchema"
+    
+    ErrorsData: 
+      description: Error Response
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorsResponse"
+
+
+  schemas:
+    deliverAuthenticationCodeRequestSchema:
+      required:
+      - authenticationCode
+      - authenticationFlowId
+      - expirationDateTime
+      - fundingAccountInfo
+      - reasonCode
+      - requestId
+      - tokenRequestorId
+      type: object
+      properties:
+        requestId:
+          type: string
+          description: Unique identifier for the request message.<br>   __Max length
+            - 64__
+          example: "123456"
+        authenticationFlowId:
+          type: string
+          description: A unique id to identify the flow to authenticate an account
+            holder. Value linking messages for a single authentication request.<br>  __Max
+            length - 128__
+          example: D98765432104
+        authenticationCode:
+          type: string
+          description: The code to be distributed for the authentication.<br>  __Max
+            length - 32__
+          example: A1B2C3D4
+        expirationDateTime:
+          type: string
+          description: |
+            The date and time when the authentication code is no longer valid. Expressed in ISO 8601 extended format. Must be either
+            * YYYY-MM-DDThh:mm:ss[.sss]Z
+            * YYYY-MM-DDThh:mm:ss[.sss]±hh:mm where [.sss] is optional and can be 1 to 3 digits.<br>  __Max length - 29__
+          example: 2019-07-04T12:08:56.123-07:00
+        reasonCode:
+          type: string
+          description: "The reason the account holder is being authenticated. The\
+            \ reason could impact the generation and validation of the code in a number\
+            \ of ways including but not limited to the time period of validity of\
+            \ the code and the number of attempts allowed to validate the code. New\
+            \ reason codes can be added at any time, and this should not result in\
+            \ a failure. Must be either \n * 'PAYMENT_TRANSACTION' (Account holder\
+            \ being authenticated in order to perform a payment transaction)\n * 'OTHER'\
+            \ (Account holder being authenticated for a reason not enumerated in this\
+            \ list) <br>  __Max length - 64__\n"
+          example: PAYMENT_TRANSACTION
+        fundingAccountInfo:
+          $ref: '#/components/schemas/fundingAccountInfoSchema1'
+        tokenRequestorId:
+          type: string
+          description: The party that requested the digitization. <br> __Max length
+            - 11(Exact)__
+          example: "5412332145"
+        walletId:
+          type: string
+          description: The identifier of the Wallet Provider who requested the digitization.
+            <br> __Max length - 3__
+          example: "123"
+        paymentAppInstanceId:
+          type: string
+          description: The identifier of the Payment App instance within a device
+            that will be provisioned with a token. Only present when supplied by a
+            Wallet Provider. <br> __Max length - 64__
+          example: 123abd434sdxox13
+        paymentAppName:
+          type: string
+          description: Identifier for the Payment App, unique per app as assigned
+            by Mastercard for this Payment App. <br> __Max length - 64__
+          example: My Payment App
+        consumerFacingEntityName:
+          type: string
+          description: The name of the token requestor to be displayed to the account
+            holder. <br> __Max length - 100__
+          example: Wallet
+    fundingAccountInfoSchema1:
+      required:
+      - encryptedPayload
+      - panUniqueReference
+      - tokenUniqueReference
+      type: object
+      properties:
+        panUniqueReference:
+          type: string
+          description: Reference to the PAN that is unique per token Requestor.<br>  __Max
+            length - 64__
+          example: FWSPMC000000000159f71f703d2141efaf04dd26803f922b
+        tokenUniqueReference:
+          type: string
+          description: A unique reference assigned following the allocation of a token
+            used to identify the token for the duration of its lifetime.<br>  __Max
+            length - 64__
+          example: DWSPMC000000000132d72d4fcb2f4136a0532d3093ff1a45
+        encryptedPayload:
+          $ref: '#/components/schemas/encryptedPayloadIn'
+    encryptedPayloadIn:
+      required:
+      - encryptedData
+      - encryptedKey
+      - publicKeyFingerprint
+      type: object
+      properties:
+        publicKeyFingerprint:
+          type: string
+          description: The fingerprint of the public key used to encrypt the ephemeral
+            AES key.<br>  __Max length - 64. Hex-encoded Data (case-insensitive)__
+          example: 4c4ead5927f0df8117f178eea9308daa58e27c2b
+        encryptedKey:
+          type: string
+          description: One-time use AES key encrypted by the Mastercard public key
+            as identified by 'publicKeyFingerprint' using the OAEP or RSA Encryption
+            Standard PKCS1 v1.5, depending on the value of 'oaepHashingAlgorithm'
+            specified during onboarding. Requirement is for a 128-bit key (with 256-bit
+            key supported as an option). The Mastercard public key is provided by
+            the issuer during onboarding through the mastercard developer interface.<br>  __Max
+            length - 512. Hex-encoded Data (case-insensitive)__
+          example: A1B2C3D4E5F6112233445566
+        oaepHashingAlgorithm:
+          type: string
+          description: |
+            Hashing algorithm used with the OAEP scheme. Omitted, when the RSA Encryption Standard PKCS 1 v1.5 is used. Must be either
+             * SHA256 - Use the SHA-256 algorithm
+             * SHA512 - Use the SHA-512 algorithm. <br>  __Max length - 6__
+          example: SHA512
+        iv:
+          type: string
+          description: The initialization vector used when encrypting data using the
+            one-time use AES key. Must be exactly 16 bytes (32 character hex string)
+            to match the block size. If not present, an IV of zero is assumed. <br>  __Length
+            - exactly 32. Hex-encoded Data (case-insensitive)__
+          example: "31323334353637383930313233343536"
+        encryptedData:
+          $ref: '#/components/schemas/fundingAccountDataSchema'
+    fundingAccountDataSchema:
+      required:
+      - cardAccountData
+      - tokenData
+      type: object
+      properties:
+        cardAccountData:
+          $ref: '#/components/schemas/cardAccountDataSchema'
+        financialAccountData:
+          $ref: '#/components/schemas/financialAccountDataSchema'
+        tokenData:
+          $ref: '#/components/schemas/tokenDataSchema'
+        dataValidUntilTimestamp:
+          type: string
+          description: |-
+            The date/time after which this EncryptedData object is considered invalid. If present, all systems must reject this EncryptedData object after this time and treat it as invalid data. Expressed in ISO 8601 extended format. Must be either
+             * YYYY-MM-DDThh:mm:ss[.sss]Z
+             * YYYY-MM-DDThh:mm:ss[.sss]±hh:mm where [.sss] is optional and can be 1 to 3 digits. <br> <br>  __Max length - 29.__
+          example: 2020-07-04T12:09:56.123-07:00
+    cardAccountDataSchema:
+      required:
+      - accountNumber
+      type: object
+      properties:
+        accountNumber:
+          type: string
+          description: The Account Primary Account Number (PAN) of the account holder
+            to be authenticated.<br>  __Max length - 19, min length - 9. Type - Numeric
+            characters only__
+          example: "5123456789012345"
+        expiryMonth:
+          type: string
+          description: The month of the expiration date of the card to be authenticated.
+            May be omitted if the card does not have an expiry date. <br>  __Length
+            - exactly 2. Type - Numeric characters only__
+          example: "12"
+        expiryYear:
+          type: string
+          description: The year of the expiration date of the card to be authenticated.
+            May be omitted if the card does not have an expiry date. <br>  __Length
+            - exactly 2. Type - Numeric characters only__
+          example: "19"
+    financialAccountDataSchema:
+      required:
+      - countryCode
+      - financialAccountId
+      - interbankCardAssociationId
+      type: object
+      properties:
+        financialAccountId:
+          type: string
+          description: The identifier of the financial account being tokenized.  This
+            could be a bank account number or other types of financial accounts. <br>  __Max
+            length - 64, min length - 9. Spaces not allowed__
+          example: "5123456789012345"
+        interbankCardAssociationId:
+          type: string
+          description: The id assigned by Mastercard to the financial institution.
+            <br>  __Max length 11, min length 3. Numeric characters only__
+          example: "1234"
+        countryCode:
+          type: string
+          description: The country of the financial account. Expressed as a 3-letter
+            (alpha-3) country code as defined in ISO 3166-1. <br>  __Length - exactly
+            3__
+          example: GBR
+    tokenDataSchema:
+      required:
+      - expiryMonth
+      - expiryYear
+      - token
+      type: object
+      properties:
+        token:
+          type: string
+          description: The token of the account holder to be authenticated.<br>  __Max
+            length - 19, min length - 12. Numeric characters only__
+          example: "5345678901234521"
+        expiryMonth:
+          type: string
+          description: The month of the token expiration date. <br>  __Length - exactly
+            2. Numeric characters only__
+          example: "10"
+        expiryYear:
+          type: string
+          description: The year of the token expiration date. <br>  __Length - exactly
+            2. Numeric characters only__
+          example: "20"
+    deliverAuthenticationCodeResponseSchema:
+      required:
+      - responseId
+      type: object
+      properties:
+        responseId:
+          type: string
+          description: Unique identifier for the response message.<br>  __Max length
+            - 64__
+          example: "123456"
+        errorCode:
+          type: string
+          description: Error code for the reason the operation failed. Conditional
+            - required if an error occurred while performing the operation. <br>  __Max
+            length - 32__
+          example: INVALID_JSON
+        errorDescription:
+          type: string
+          description: Error description of the reason the operation failed. <br>  __Max
+            length - 256__
+          example: Invalid JSON
+    ErrorsResponse:
+      type: object
+      properties:
+        errorCode:
+          type: string
+          description: Error code for the reason the operation failed. Max length
+            - 32. Type - String. Conditional – required if an error occurred performing
+            the operation.
+          example: INVALID_JSON
+        errorDescription:
+          type: string
+          description: Error description of the reason the operation failed. Max length
+            - 256. Type - String.
+          example: Invalid JSON
