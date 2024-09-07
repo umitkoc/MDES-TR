@@ -45,6 +45,8 @@
             DeliverActivationCodeBtn = new Button();
             groupBox1 = new GroupBox();
             groupBox2 = new GroupBox();
+            ValidateActivationCodeBtn = new Button();
+            AuthorizeServiceBtn = new Button();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             SuspendLayout();
@@ -188,7 +190,7 @@
             // 
             // DeliverActivationCodeBtn
             // 
-            DeliverActivationCodeBtn.Location = new Point(273, 434);
+            DeliverActivationCodeBtn.Location = new Point(6, 78);
             DeliverActivationCodeBtn.Name = "DeliverActivationCodeBtn";
             DeliverActivationCodeBtn.Size = new Size(159, 46);
             DeliverActivationCodeBtn.TabIndex = 14;
@@ -199,6 +201,7 @@
             // groupBox1
             // 
             groupBox1.Controls.Add(DeliverAuthenticationCodeBtn);
+            groupBox1.Controls.Add(DeliverActivationCodeBtn);
             groupBox1.Location = new Point(457, 408);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(200, 374);
@@ -225,14 +228,35 @@
             groupBox2.TabStop = false;
             groupBox2.Text = "Tokenize From MDES-TR";
             // 
+            // ValidateActivationCodeBtn
+            // 
+            ValidateActivationCodeBtn.Location = new Point(273, 486);
+            ValidateActivationCodeBtn.Name = "ValidateActivationCodeBtn";
+            ValidateActivationCodeBtn.Size = new Size(159, 46);
+            ValidateActivationCodeBtn.TabIndex = 19;
+            ValidateActivationCodeBtn.Text = "Validate Activation Code";
+            ValidateActivationCodeBtn.UseVisualStyleBackColor = true;
+            ValidateActivationCodeBtn.Click += ValidateActivationCodeBtn_Click;
+            // 
+            // AuthorizeServiceBtn
+            // 
+            AuthorizeServiceBtn.Location = new Point(273, 538);
+            AuthorizeServiceBtn.Name = "AuthorizeServiceBtn";
+            AuthorizeServiceBtn.Size = new Size(159, 46);
+            AuthorizeServiceBtn.TabIndex = 20;
+            AuthorizeServiceBtn.Text = "Authorize Service";
+            AuthorizeServiceBtn.UseVisualStyleBackColor = true;
+            AuthorizeServiceBtn.Click += AuthorizeServiceBtn_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1468, 794);
+            Controls.Add(AuthorizeServiceBtn);
+            Controls.Add(ValidateActivationCodeBtn);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
-            Controls.Add(DeliverActivationCodeBtn);
             Controls.Add(DigitazeBtn);
             Controls.Add(requestText);
             Controls.Add(responseText);
@@ -263,5 +287,7 @@
         private Button DeliverActivationCodeBtn;
         private GroupBox groupBox1;
         private GroupBox groupBox2;
+        private Button ValidateActivationCodeBtn;
+        private Button AuthorizeServiceBtn;
     }
 }

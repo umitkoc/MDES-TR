@@ -3,3 +3,6 @@ https://developer.mastercard.com/mdes-pre-digitization/documentation/
 https://developer.mastercard.com/mdes-pre-digitization/documentation/use_case/tokenization/
 https://developer.mastercard.com/mdes-pre-digitization/documentation/use_case/issuer-tokenization/
 https://developer.mastercard.com/mdes-pre-digitization/documentation/
+
+// test cards
+https://developer.mastercard.com/mastercard-checkout-solutions/documentation/testing/test_data/

@@ -369,7 +369,7 @@ namespace form
 
         private void DigitazeBtn_Click(object sender, EventArgs e)
         {
-            
+
 
         }
 
@@ -449,24 +449,143 @@ namespace form
             var deliverActivationCodeApi = new DeliverActivationCodeApi() { Client = client };
             var requestBody = new DeliverActivationCodeRequestSchema()
             {
-                activationCode="",
-                activationMethod=new ActivationMethod()
+                activationCode = "",
+                activationMethod = new ActivationMethod()
                 {
-                    type="",
-                    value=""
+                    type = "",
+                    value = ""
                 },
-                consumerFacingEntityName="",
-                correlationId="",   
-                expirationDateTime="",
+                consumerFacingEntityName = "",
+                correlationId = "",
+                expirationDateTime = "",
                 reasonCodes = [],
-                requestId="",
-                tokenUniqueReference=""
+                requestId = "",
+                tokenUniqueReference = ""
             };
             DeliverActivationCodeResponseSchema responseBody;
             try
             {
                 requestText.Text = JsonSerializer.Serialize(requestBody);
                 responseBody = deliverActivationCodeApi.DeliverActivationCode(requestBody);
+                responseText.Text = JsonSerializer.Serialize(responseBody);
+            }
+            catch (Exception ex)
+            {
+                responseText.Text = ex.Message.ToString();
+            }
+        }
+
+        private void ValidateActivationCodeBtn_Click(object sender, EventArgs e)
+        {
+            var validateActivationCodeApi = new ValidateActivationCodeApi() { Client = client };
+            var requestBody = new ValidateActivationCodeRequestSchema()
+            {
+                activationCode = "",
+                correlationId = "",
+                requestId = "",
+                tokenUniqueReference = "",
+            };
+            ValidateActivationCodeResponseSchema responseBody;
+            try
+            {
+                requestText.Text = JsonSerializer.Serialize(requestBody);
+                responseBody = validateActivationCodeApi.ValidateActivationCode(requestBody);
+                responseText.Text = JsonSerializer.Serialize(responseBody);
+            }
+            catch (Exception ex)
+            {
+                responseText.Text = ex.Message.ToString();
+            }
+        }
+
+        private void AuthorizeServiceBtn_Click(object sender, EventArgs e)
+        {
+            var authorizeServiceApi=new AuthorizeServiceApi() { Client=client};
+            var requestBody = new AuthorizeServiceRequestSchema()
+            {
+                correlationId = "",
+                requestId = "",
+                accountIdHash="",
+                activeTokenCount="",
+                chipDataValidationResult="",
+                consumerFacingEntityName="",
+                deviceInfo=new DeviceInfo()
+                {
+                    cardCaptureTechnology="",
+                    deviceName="",
+                    formFactor="",
+                    imei="",
+                    isoDeviceType="",
+                    msisdn="",
+                    osName="",
+                    osVersion="",
+                    paymentTypes = [],
+                    serialNumber="",
+                    storageTechnology=""
+
+                },
+                fundingAccountInfo=new FundingAccountInfoSchema1()
+                {
+                    encryptedPayload=new EncryptedPayloadIn()
+                    {
+                        encryptedData = new FundingAccountDataSchema()
+                        {
+                            accountHolderData = new AccountHolderDataSchema()
+                            {
+                                sourceIp = "issuer ip",
+                                accountHolderAddress = new BillingAddressSchema()
+                                {
+                                    city = "",
+                                    country = "",
+                                    countrySubdivision = "",
+                                    line1 = "",
+                                    line2 = "",
+                                    postalCode = ""
+
+                                },
+                                accountHolderEmailAddress = "",
+                                accountHolderMobilePhoneNumber = new PhoneNumberSchema()
+                                {
+                                    countryDialInCode = "",
+                                    phoneNumber = ""
+                                },
+                                accountHolderName = "",
+                                consumerIdentifier = "",
+                                deviceLocation = ""
+
+                            }
+                        },
+                        encryptedKey = "",
+                        iv = "",
+                        oaepHashingAlgorithm = "",
+                        publicKeyFingerprint = ""
+                    },
+                    panUniqueReference="",
+                    tokenUniqueReference=""
+                },
+                mobileNumberSuffix="",
+                panSequenceNumber="",
+                paymentAppInstanceId="",
+                services = [],
+                tokenRequestorId="",
+                tokenType="",
+                walletId="",
+              walletProviderDecisioningInfo=new WalletProviderDecisioningInfo()
+              {
+                  accountLifeTime="",
+                  accountScore="",
+                  phoneNumberScore="",
+                  deviceScore="",
+                  recommendationReasons = [],
+                  recommendationStandardVersion="",
+                  recommendedDecision=""
+              }  
+            };
+            AuthorizeServiceResponseSchema responseBody;
+            try
+            {
+                requestText.Text = JsonSerializer.Serialize(requestBody);
+                responseBody = authorizeServiceApi.AuthorizeService(requestBody);
                 responseText.Text = JsonSerializer.Serialize(responseBody);
             }
             catch (Exception ex)
