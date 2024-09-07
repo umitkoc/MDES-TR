@@ -36,7 +36,6 @@ namespace form
         {
             InitializeComponent();
             handler = new HttpClientHandler();
-            Asset = new ProductConfig();
             encryptionCertificate = EncryptionUtils.LoadEncryptionCertificate(certificatePathPEM);
             decryptionKey = EncryptionUtils.LoadDecryptionKey(certificatePath, certificatePassword, certificatePassword);
             config = FieldLevelEncryptionConfigBuilder.AFieldLevelEncryptionConfig()

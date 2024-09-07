@@ -58,7 +58,7 @@
             responseText.Location = new Point(777, 408);
             responseText.Multiline = true;
             responseText.Name = "responseText";
-            responseText.Size = new Size(644, 376);
+            responseText.Size = new Size(644, 374);
             responseText.TabIndex = 1;
             // 
             // requestText
@@ -170,17 +170,11 @@
             GetTaskStatusBtn.UseVisualStyleBackColor = true;
             GetTaskStatusBtn.Click += GetTaskStatusBtn_Click;
             // 
-            responseText.Location = new Point(497, 138);
-            responseText.Multiline = true;
-            responseText.Name = "responseText";
-            responseText.Size = new Size(259, 241);
-            responseText.TabIndex = 1;
-            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1433, 787);
+            ClientSize = new Size(1468, 794);
             Controls.Add(GetTokenBtn);
             Controls.Add(SearchTokensBtn);
             Controls.Add(GetTaskStatusBtn);
@@ -192,7 +186,6 @@
             Controls.Add(TransactBtn);
             Controls.Add(DigitazeBtn);
             Controls.Add(requestText);
-            ClientSize = new Size(800, 450);
             Controls.Add(responseText);
             Controls.Add(tokenizeBtn);
             Name = "Form1";
