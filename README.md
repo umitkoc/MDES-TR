@@ -205,5 +205,3 @@ Class | Method | HTTP request | Description
 ## Documentation for Authorization
 
 Endpoints do not require authorization.
-
->>>>>>> 21a0d78 (first commit)
