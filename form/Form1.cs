@@ -76,14 +76,15 @@ namespace form
             TokenizeResults responseBody;
             try
             {
-                requestText.Text = JsonSerializer.Serialize(requestBody);
+                requestText.Text = JsonSerializer.Serialize(requestBody,new JsonSerializerOptions() { WriteIndented=true});
                 responseBody = tokenizeApi.CreateTokenize(requestBody);
                 Asset = responseBody.ProductConfig;
-                responseText.Text = responseBody.ToString();
+                responseText.Text = JsonSerializer.Serialize(responseBody, new JsonSerializerOptions() { WriteIndented = true });
             }
             catch (Exception ex)
             {
-                responseText.Text = ex.Message.ToString();
+                responseText.Text = ex.Message;
+
             }
 
         }
@@ -101,13 +102,13 @@ namespace form
             TransactResults responseBody;
             try
             {
-                requestText.Text = JsonSerializer.Serialize(requestBody);
+                requestText.Text = JsonSerializer.Serialize(requestBody,new JsonSerializerOptions() { WriteIndented=true});
                 responseBody = transacApi.CreateTransact(requestBody);
-                responseText.Text = responseBody.ToString();
+                responseText.Text = JsonSerializer.Serialize(responseBody, new JsonSerializerOptions() { WriteIndented = true });
             }
             catch (Exception ex)
             {
-                responseText.Text = ex.Message.ToString();
+                responseText.Text = ex.Message;
             }
         }
         #region payload
@@ -151,13 +152,13 @@ namespace form
             NotifyTokenUpdatedResults responseBody;
             try
             {
-                requestText.Text = JsonSerializer.Serialize(requestBody);
+                requestText.Text = JsonSerializer.Serialize(requestBody,new JsonSerializerOptions() { WriteIndented=true});
                 responseBody = notifyTokenUpdatedApi.NotifyTokenUpdateForTokenStateChange(requestBody);
-                responseText.Text = JsonSerializer.Serialize(responseBody);
+                responseText.Text = JsonSerializer.Serialize(responseBody, new JsonSerializerOptions() { WriteIndented = true });
             }
             catch (Exception ex)
             {
-                responseText.Text = ex.Message.ToString();
+                responseText.Text = ex.Message;
             }
         }
 
@@ -170,7 +171,7 @@ namespace form
             }
             catch (Exception ex)
             {
-                responseText.Text = ex.Message.ToString();
+                responseText.Text = ex.Message;
             }
         }
 
@@ -190,13 +191,13 @@ namespace form
             SuspendResults responseBody;
             try
             {
-                requestText.Text = JsonSerializer.Serialize(requestBody);
+                requestText.Text = JsonSerializer.Serialize(requestBody,new JsonSerializerOptions() { WriteIndented=true});
                 responseBody = suspendApi.CreateSuspend(requestBody);
-                responseText.Text = JsonSerializer.Serialize(responseBody);
+                responseText.Text = JsonSerializer.Serialize(responseBody, new JsonSerializerOptions() { WriteIndented = true });
             }
             catch (Exception ex)
             {
-                responseText.Text = ex.Message.ToString();
+                responseText.Text = ex.Message;
             }
         }
 
@@ -216,13 +217,13 @@ namespace form
             UnSuspendResults responseBody;
             try
             {
-                requestText.Text = JsonSerializer.Serialize(requestBody);
+                requestText.Text = JsonSerializer.Serialize(requestBody,new JsonSerializerOptions() { WriteIndented=true});
                 responseBody = unSuspendApi.CreateUnsuspend(requestBody);
-                responseText.Text = JsonSerializer.Serialize(responseBody);
+                responseText.Text = JsonSerializer.Serialize(responseBody, new JsonSerializerOptions() { WriteIndented = true });
             }
             catch (Exception ex)
             {
-                responseText.Text = ex.Message.ToString();
+                responseText.Text = ex.Message;
             }
         }
 
@@ -242,13 +243,13 @@ namespace form
             DeleteResults responseBody;
             try
             {
-                requestText.Text = JsonSerializer.Serialize(requestBody);
+                requestText.Text = JsonSerializer.Serialize(requestBody,new JsonSerializerOptions() { WriteIndented=true});
                 responseBody = deleteApi.DeleteDigitization(requestBody);
-                responseText.Text = JsonSerializer.Serialize(responseBody);
+                responseText.Text = JsonSerializer.Serialize(responseBody, new JsonSerializerOptions() { WriteIndented = true });
             }
             catch (Exception ex)
             {
-                responseText.Text = ex.Message.ToString();
+                responseText.Text = ex.Message;
             }
         }
 
@@ -265,13 +266,13 @@ namespace form
             GetTaskStatusResults responseBody;
             try
             {
-                requestText.Text = JsonSerializer.Serialize(requestBody);
+                requestText.Text = JsonSerializer.Serialize(requestBody,new JsonSerializerOptions() { WriteIndented=true});
                 responseBody = getTaskStatusApi.GetTaskStatus(requestBody);
-                responseText.Text = JsonSerializer.Serialize(responseBody);
+                responseText.Text = JsonSerializer.Serialize(responseBody, new JsonSerializerOptions() { WriteIndented = true });
             }
             catch (Exception ex)
             {
-                responseText.Text = ex.Message.ToString();
+                responseText.Text = ex.Message;
             }
         }
 
@@ -332,13 +333,13 @@ namespace form
             SearchTokensResults responseBody;
             try
             {
-                requestText.Text = JsonSerializer.Serialize(requestBody);
+                requestText.Text = JsonSerializer.Serialize(requestBody,new JsonSerializerOptions() { WriteIndented=true});
                 responseBody = searchTokenApi.SearchTokens(requestBody);
-                responseText.Text = JsonSerializer.Serialize(responseBody);
+                responseText.Text = JsonSerializer.Serialize(responseBody, new JsonSerializerOptions() { WriteIndented = true });
             }
             catch (Exception ex)
             {
-                responseText.Text = ex.Message.ToString();
+                responseText.Text = ex.Message;
             }
         }
 
@@ -356,13 +357,13 @@ namespace form
             GetTokenResults responseBody;
             try
             {
-                requestText.Text = JsonSerializer.Serialize(requestBody);
+                requestText.Text = JsonSerializer.Serialize(requestBody,new JsonSerializerOptions() { WriteIndented=true});
                 responseBody = getTaskStatusApi.GetToken(requestBody);
-                responseText.Text = JsonSerializer.Serialize(responseBody);
+                responseText.Text = JsonSerializer.Serialize(responseBody, new JsonSerializerOptions() { WriteIndented = true });
             }
             catch (Exception ex)
             {
-                responseText.Text = ex.Message.ToString();
+                responseText.Text = ex.Message;
             }
         }
 
@@ -429,13 +430,13 @@ namespace form
             DeliverAuthenticationCodeResponseSchema responseBody;
             try
             {
-                requestText.Text = JsonSerializer.Serialize(requestBody);
+                requestText.Text = JsonSerializer.Serialize(requestBody,new JsonSerializerOptions() { WriteIndented=true});
                 responseBody = deliverAuthenticationCodeApi.DeliverAuthenticationCode(requestBody);
-                responseText.Text = JsonSerializer.Serialize(responseBody);
+                responseText.Text = JsonSerializer.Serialize(responseBody, new JsonSerializerOptions() { WriteIndented = true });
             }
             catch (Exception ex)
             {
-                responseText.Text = ex.Message.ToString();
+                responseText.Text = ex.Message;
             }
         }
 
@@ -460,13 +461,13 @@ namespace form
             DeliverActivationCodeResponseSchema responseBody;
             try
             {
-                requestText.Text = JsonSerializer.Serialize(requestBody);
+                requestText.Text = JsonSerializer.Serialize(requestBody,new JsonSerializerOptions() { WriteIndented=true});
                 responseBody = deliverActivationCodeApi.DeliverActivationCode(requestBody);
-                responseText.Text = JsonSerializer.Serialize(responseBody);
+                responseText.Text = JsonSerializer.Serialize(responseBody, new JsonSerializerOptions() { WriteIndented = true });
             }
             catch (Exception ex)
             {
-                responseText.Text = ex.Message.ToString();
+                responseText.Text = ex.Message;
             }
         }
 
@@ -483,13 +484,13 @@ namespace form
             ValidateActivationCodeResponseSchema responseBody;
             try
             {
-                requestText.Text = JsonSerializer.Serialize(requestBody);
+                requestText.Text = JsonSerializer.Serialize(requestBody,new JsonSerializerOptions() { WriteIndented=true});
                 responseBody = validateActivationCodeApi.ValidateActivationCode(requestBody);
-                responseText.Text = JsonSerializer.Serialize(responseBody);
+                responseText.Text = JsonSerializer.Serialize(responseBody, new JsonSerializerOptions() { WriteIndented = true });
             }
             catch (Exception ex)
             {
-                responseText.Text = ex.Message.ToString();
+                responseText.Text = ex.Message;
             }
         }
 
@@ -583,13 +584,13 @@ namespace form
             AuthorizeServiceResponseSchema responseBody;
             try
             {
-                requestText.Text = JsonSerializer.Serialize(requestBody);
+                requestText.Text = JsonSerializer.Serialize(requestBody,new JsonSerializerOptions() { WriteIndented=true});
                 responseBody = authorizeServiceApi.AuthorizeService(requestBody);
-                responseText.Text = JsonSerializer.Serialize(responseBody);
+                responseText.Text = JsonSerializer.Serialize(responseBody, new JsonSerializerOptions() { WriteIndented = true });
             }
             catch (Exception ex)
             {
-                responseText.Text = ex.Message.ToString();
+                responseText.Text = ex.Message;
             }
         }
 
@@ -661,19 +662,14 @@ namespace form
             NotifyServiceActivatedResponseSchema responseBody;
             try
             {
-                requestText.Text = JsonSerializer.Serialize(requestBody);
+                requestText.Text = JsonSerializer.Serialize(requestBody,new JsonSerializerOptions() { WriteIndented=true});
                 responseBody = notifyServiceActivatedApi.NotifyServiceActivated(requestBody);
-                responseText.Text = JsonSerializer.Serialize(responseBody);
+                responseText.Text = JsonSerializer.Serialize(responseBody, new JsonSerializerOptions() { WriteIndented = true });
             }
             catch (Exception ex)
             {
-                responseText.Text = ex.Message.ToString();
+                responseText.Text = ex.Message;
             }
-        }
-        private void DigitazeBtn_Click(object sender, EventArgs e)
-        {
-
-
         }
 
         private void RequestActivationMethodsBtn_Click(object sender, EventArgs e)
@@ -736,13 +732,13 @@ namespace form
             RequestActivationMethodsResponseSchema responseBody;
             try
             {
-                requestText.Text = JsonSerializer.Serialize(requestBody);
+                requestText.Text = JsonSerializer.Serialize(requestBody,new JsonSerializerOptions() { WriteIndented=true});
                 responseBody = requestActivationMethodsApi.RequestForActivationMethods(requestBody);
-                responseText.Text = JsonSerializer.Serialize(responseBody);
+                responseText.Text = JsonSerializer.Serialize(responseBody, new JsonSerializerOptions() { WriteIndented = true });
             }
             catch (Exception ex)
             {
-                responseText.Text = ex.Message.ToString();
+                responseText.Text = ex.Message;
             }
         }
 
@@ -797,13 +793,13 @@ namespace form
             GetAccountInformationResponseSchema responseBody;
             try
             {
-                requestText.Text = JsonSerializer.Serialize(requestBody);
+                requestText.Text = JsonSerializer.Serialize(requestBody,new JsonSerializerOptions() { WriteIndented=true});
                 responseBody = getAccountInformationApi.GetAccountInformation(requestBody);
-                responseText.Text = JsonSerializer.Serialize(responseBody);
+                responseText.Text = JsonSerializer.Serialize(responseBody, new JsonSerializerOptions() { WriteIndented = true });
             }
             catch (Exception ex)
             {
-                responseText.Text = ex.Message.ToString();
+                responseText.Text = ex.Message;
             }
         }
 
@@ -838,13 +834,13 @@ namespace form
             NotifySuspiciousEventsResponseSchema responseBody;
             try
             {
-                requestText.Text = JsonSerializer.Serialize(requestBody);
+                requestText.Text = JsonSerializer.Serialize(requestBody,new JsonSerializerOptions() { WriteIndented=true});
                 responseBody = notifySuspiciousEventsApi.NotifySuspiciousEvents(requestBody);
-                responseText.Text = JsonSerializer.Serialize(responseBody);
+                responseText.Text = JsonSerializer.Serialize(responseBody, new JsonSerializerOptions() { WriteIndented = true });
             }
             catch (Exception ex)
             {
-                responseText.Text = ex.Message.ToString();
+                responseText.Text = ex.Message;
             }
         }
     }
