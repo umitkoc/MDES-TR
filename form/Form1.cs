@@ -6,11 +6,13 @@ using Newtonsoft.Json.Linq;
 using Org.OpenAPITools.Api;
 using Org.OpenAPITools.Client;
 using Org.OpenAPITools.Model;
+using RestSharp.Authenticators;
 using System.Security.Cryptography.X509Certificates;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static Mastercard.Developer.ClientEncryption.Core.Encryption.FieldLevelEncryptionConfig;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace form
 {
@@ -842,6 +844,13 @@ namespace form
             {
                 responseText.Text = ex.Message;
             }
+        }
+
+
+        private string GenerateActivationCode(string appname,string username)
+        {
+            // generate 6 digit activation code
+            return "";
         }
     }
 }
