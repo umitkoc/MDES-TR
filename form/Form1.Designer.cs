@@ -43,8 +43,8 @@
             DeliverAuthenticationCodeBtn = new Button();
             DeliverActivationCodeBtn = new Button();
             groupBox1 = new GroupBox();
-            RequestActivationMethodsBtn = new Button();
             NotifyServiceActivatedBtn = new Button();
+            RequestActivationMethodsBtn = new Button();
             AuthorizeServiceBtn = new Button();
             groupBox2 = new GroupBox();
             GetAccountInformationBtn = new Button();
@@ -52,6 +52,7 @@
             groupBox3 = new GroupBox();
             NotifySuspiciousEventsBtn = new Button();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            healthCheckBtn = new Button();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
@@ -212,16 +213,6 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Send to Issuer";
             // 
-            // RequestActivationMethodsBtn
-            // 
-            RequestActivationMethodsBtn.Location = new Point(6, 596);
-            RequestActivationMethodsBtn.Name = "RequestActivationMethodsBtn";
-            RequestActivationMethodsBtn.Size = new Size(159, 46);
-            RequestActivationMethodsBtn.TabIndex = 10;
-            RequestActivationMethodsBtn.Text = "Request Activation Methods";
-            RequestActivationMethodsBtn.UseVisualStyleBackColor = true;
-            RequestActivationMethodsBtn.Click += RequestActivationMethodsBtn_Click;
-            // 
             // NotifyServiceActivatedBtn
             // 
             NotifyServiceActivatedBtn.Location = new Point(6, 182);
@@ -231,6 +222,16 @@
             NotifyServiceActivatedBtn.Text = "Notify Service Activated";
             NotifyServiceActivatedBtn.UseVisualStyleBackColor = true;
             NotifyServiceActivatedBtn.Click += NotifyServiceActivatedBtn_Click;
+            // 
+            // RequestActivationMethodsBtn
+            // 
+            RequestActivationMethodsBtn.Location = new Point(6, 596);
+            RequestActivationMethodsBtn.Name = "RequestActivationMethodsBtn";
+            RequestActivationMethodsBtn.Size = new Size(159, 46);
+            RequestActivationMethodsBtn.TabIndex = 10;
+            RequestActivationMethodsBtn.Text = "Request Activation Methods";
+            RequestActivationMethodsBtn.UseVisualStyleBackColor = true;
+            RequestActivationMethodsBtn.Click += RequestActivationMethodsBtn_Click;
             // 
             // AuthorizeServiceBtn
             // 
@@ -285,6 +286,7 @@
             // 
             // groupBox3
             // 
+            groupBox3.Controls.Add(healthCheckBtn);
             groupBox3.Controls.Add(NotifySuspiciousEventsBtn);
             groupBox3.Controls.Add(DeleteBtn);
             groupBox3.Location = new Point(254, 538);
@@ -303,6 +305,16 @@
             NotifySuspiciousEventsBtn.Text = "Notify Suspicious Events";
             NotifySuspiciousEventsBtn.UseVisualStyleBackColor = true;
             NotifySuspiciousEventsBtn.Click += NotifySuspiciousEventsBtn_Click;
+            // 
+            // healthCheckBtn
+            // 
+            healthCheckBtn.Location = new Point(6, 126);
+            healthCheckBtn.Name = "healthCheckBtn";
+            healthCheckBtn.Size = new Size(159, 46);
+            healthCheckBtn.TabIndex = 21;
+            healthCheckBtn.Text = "HealthCheck";
+            healthCheckBtn.UseVisualStyleBackColor = true;
+            healthCheckBtn.Click += healthCheckBtn_ClickAsync;
             // 
             // Form1
             // 
@@ -349,5 +361,6 @@
         private Button RequestActivationMethodsBtn;
         private Button GetAccountInformationBtn;
         private Button NotifySuspiciousEventsBtn;
+        private Button healthCheckBtn;
     }
 }

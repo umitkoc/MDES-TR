@@ -1,29 +1,27 @@
 using Mastercard.Developer.ClientEncryption.Core.Encryption;
 using Mastercard.Developer.ClientEncryption.Core.Encryption.JWE;
 using Mastercard.Developer.ClientEncryption.Core.Utils;
+using Mastercard.Developer.OAuth1Signer.Core;
 using Mastercard.Developer.OAuth1Signer.Core.Utils;
-using Newtonsoft.Json.Linq;
 using Org.OpenAPITools.Api;
 using Org.OpenAPITools.Client;
 using Org.OpenAPITools.Model;
-using RestSharp.Authenticators;
 using System.Security.Cryptography.X509Certificates;
+using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using static Mastercard.Developer.ClientEncryption.Core.Encryption.FieldLevelEncryptionConfig;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace form
 {
     public partial class Form1 : Form
     {
         private const string basePath = "https://sandbox.api.mastercard.com/mdes";
-        private const string certificatePath = "C:\\certificates\\MDES-TR-sandbox-signing.p12";
-        private const string certificatePathPEM = "C:\\certificates\\certificate.pem";
+        private const string localPath = "C:\\Users\\umitkoc\\Desktop\\certificates";
+        private const string certificatePath = $"{localPath}\\Panda1881-sandbox.p12";
+        private const string certificatePathPEM = $"{localPath}\\certificate.pem";
         private const string certificatePassword = "Panda1881";
         private const string clientID = "3rxtyb4-tHOAeFEzRyZ-AdheWOdac4sM3HhhRXjWd8c04fdd";
-        private const string consumerKey = "3rxtyb4-tHOAeFEzRyZ-AdheWOdac4sM3HhhRXjWd8c04fdd!e6f7540a297e47d0bfc2608a86e1409a0000000000000000";
+        private const string consumerKey = "3rxtyb4-tHOAeFEzRyZ-AdheWOdac4sM3HhhRXjWd8c04fdd!e16fc42b76b54a1fa0252e1eff0b0ab20000000000000000";
         private readonly X509Certificate2 encryptionCertificate;
         private readonly System.Security.Cryptography.RSA decryptionKey;
         private readonly X509Certificate2 certificate;
@@ -78,7 +76,7 @@ namespace form
             TokenizeResults responseBody;
             try
             {
-                requestText.Text = JsonSerializer.Serialize(requestBody,new JsonSerializerOptions() { WriteIndented=true});
+                requestText.Text = JsonSerializer.Serialize(requestBody, new JsonSerializerOptions() { WriteIndented = true });
                 responseBody = tokenizeApi.CreateTokenize(requestBody);
                 Asset = responseBody.ProductConfig;
                 responseText.Text = JsonSerializer.Serialize(responseBody, new JsonSerializerOptions() { WriteIndented = true });
@@ -104,7 +102,7 @@ namespace form
             TransactResults responseBody;
             try
             {
-                requestText.Text = JsonSerializer.Serialize(requestBody,new JsonSerializerOptions() { WriteIndented=true});
+                requestText.Text = JsonSerializer.Serialize(requestBody, new JsonSerializerOptions() { WriteIndented = true });
                 responseBody = transacApi.CreateTransact(requestBody);
                 responseText.Text = JsonSerializer.Serialize(responseBody, new JsonSerializerOptions() { WriteIndented = true });
             }
@@ -154,7 +152,7 @@ namespace form
             NotifyTokenUpdatedResults responseBody;
             try
             {
-                requestText.Text = JsonSerializer.Serialize(requestBody,new JsonSerializerOptions() { WriteIndented=true});
+                requestText.Text = JsonSerializer.Serialize(requestBody, new JsonSerializerOptions() { WriteIndented = true });
                 responseBody = notifyTokenUpdatedApi.NotifyTokenUpdateForTokenStateChange(requestBody);
                 responseText.Text = JsonSerializer.Serialize(responseBody, new JsonSerializerOptions() { WriteIndented = true });
             }
@@ -193,7 +191,7 @@ namespace form
             SuspendResults responseBody;
             try
             {
-                requestText.Text = JsonSerializer.Serialize(requestBody,new JsonSerializerOptions() { WriteIndented=true});
+                requestText.Text = JsonSerializer.Serialize(requestBody, new JsonSerializerOptions() { WriteIndented = true });
                 responseBody = suspendApi.CreateSuspend(requestBody);
                 responseText.Text = JsonSerializer.Serialize(responseBody, new JsonSerializerOptions() { WriteIndented = true });
             }
@@ -219,7 +217,7 @@ namespace form
             UnSuspendResults responseBody;
             try
             {
-                requestText.Text = JsonSerializer.Serialize(requestBody,new JsonSerializerOptions() { WriteIndented=true});
+                requestText.Text = JsonSerializer.Serialize(requestBody, new JsonSerializerOptions() { WriteIndented = true });
                 responseBody = unSuspendApi.CreateUnsuspend(requestBody);
                 responseText.Text = JsonSerializer.Serialize(responseBody, new JsonSerializerOptions() { WriteIndented = true });
             }
@@ -245,7 +243,7 @@ namespace form
             DeleteResults responseBody;
             try
             {
-                requestText.Text = JsonSerializer.Serialize(requestBody,new JsonSerializerOptions() { WriteIndented=true});
+                requestText.Text = JsonSerializer.Serialize(requestBody, new JsonSerializerOptions() { WriteIndented = true });
                 responseBody = deleteApi.DeleteDigitization(requestBody);
                 responseText.Text = JsonSerializer.Serialize(responseBody, new JsonSerializerOptions() { WriteIndented = true });
             }
@@ -268,7 +266,7 @@ namespace form
             GetTaskStatusResults responseBody;
             try
             {
-                requestText.Text = JsonSerializer.Serialize(requestBody,new JsonSerializerOptions() { WriteIndented=true});
+                requestText.Text = JsonSerializer.Serialize(requestBody, new JsonSerializerOptions() { WriteIndented = true });
                 responseBody = getTaskStatusApi.GetTaskStatus(requestBody);
                 responseText.Text = JsonSerializer.Serialize(responseBody, new JsonSerializerOptions() { WriteIndented = true });
             }
@@ -335,7 +333,7 @@ namespace form
             SearchTokensResults responseBody;
             try
             {
-                requestText.Text = JsonSerializer.Serialize(requestBody,new JsonSerializerOptions() { WriteIndented=true});
+                requestText.Text = JsonSerializer.Serialize(requestBody, new JsonSerializerOptions() { WriteIndented = true });
                 responseBody = searchTokenApi.SearchTokens(requestBody);
                 responseText.Text = JsonSerializer.Serialize(responseBody, new JsonSerializerOptions() { WriteIndented = true });
             }
@@ -359,7 +357,7 @@ namespace form
             GetTokenResults responseBody;
             try
             {
-                requestText.Text = JsonSerializer.Serialize(requestBody,new JsonSerializerOptions() { WriteIndented=true});
+                requestText.Text = JsonSerializer.Serialize(requestBody, new JsonSerializerOptions() { WriteIndented = true });
                 responseBody = getTaskStatusApi.GetToken(requestBody);
                 responseText.Text = JsonSerializer.Serialize(responseBody, new JsonSerializerOptions() { WriteIndented = true });
             }
@@ -432,7 +430,7 @@ namespace form
             DeliverAuthenticationCodeResponseSchema responseBody;
             try
             {
-                requestText.Text = JsonSerializer.Serialize(requestBody,new JsonSerializerOptions() { WriteIndented=true});
+                requestText.Text = JsonSerializer.Serialize(requestBody, new JsonSerializerOptions() { WriteIndented = true });
                 responseBody = deliverAuthenticationCodeApi.DeliverAuthenticationCode(requestBody);
                 responseText.Text = JsonSerializer.Serialize(responseBody, new JsonSerializerOptions() { WriteIndented = true });
             }
@@ -463,7 +461,7 @@ namespace form
             DeliverActivationCodeResponseSchema responseBody;
             try
             {
-                requestText.Text = JsonSerializer.Serialize(requestBody,new JsonSerializerOptions() { WriteIndented=true});
+                requestText.Text = JsonSerializer.Serialize(requestBody, new JsonSerializerOptions() { WriteIndented = true });
                 responseBody = deliverActivationCodeApi.DeliverActivationCode(requestBody);
                 responseText.Text = JsonSerializer.Serialize(responseBody, new JsonSerializerOptions() { WriteIndented = true });
             }
@@ -486,7 +484,7 @@ namespace form
             ValidateActivationCodeResponseSchema responseBody;
             try
             {
-                requestText.Text = JsonSerializer.Serialize(requestBody,new JsonSerializerOptions() { WriteIndented=true});
+                requestText.Text = JsonSerializer.Serialize(requestBody, new JsonSerializerOptions() { WriteIndented = true });
                 responseBody = validateActivationCodeApi.ValidateActivationCode(requestBody);
                 responseText.Text = JsonSerializer.Serialize(responseBody, new JsonSerializerOptions() { WriteIndented = true });
             }
@@ -586,7 +584,7 @@ namespace form
             AuthorizeServiceResponseSchema responseBody;
             try
             {
-                requestText.Text = JsonSerializer.Serialize(requestBody,new JsonSerializerOptions() { WriteIndented=true});
+                requestText.Text = JsonSerializer.Serialize(requestBody, new JsonSerializerOptions() { WriteIndented = true });
                 responseBody = authorizeServiceApi.AuthorizeService(requestBody);
                 responseText.Text = JsonSerializer.Serialize(responseBody, new JsonSerializerOptions() { WriteIndented = true });
             }
@@ -664,7 +662,7 @@ namespace form
             NotifyServiceActivatedResponseSchema responseBody;
             try
             {
-                requestText.Text = JsonSerializer.Serialize(requestBody,new JsonSerializerOptions() { WriteIndented=true});
+                requestText.Text = JsonSerializer.Serialize(requestBody, new JsonSerializerOptions() { WriteIndented = true });
                 responseBody = notifyServiceActivatedApi.NotifyServiceActivated(requestBody);
                 responseText.Text = JsonSerializer.Serialize(responseBody, new JsonSerializerOptions() { WriteIndented = true });
             }
@@ -734,7 +732,7 @@ namespace form
             RequestActivationMethodsResponseSchema responseBody;
             try
             {
-                requestText.Text = JsonSerializer.Serialize(requestBody,new JsonSerializerOptions() { WriteIndented=true});
+                requestText.Text = JsonSerializer.Serialize(requestBody, new JsonSerializerOptions() { WriteIndented = true });
                 responseBody = requestActivationMethodsApi.RequestForActivationMethods(requestBody);
                 responseText.Text = JsonSerializer.Serialize(responseBody, new JsonSerializerOptions() { WriteIndented = true });
             }
@@ -795,7 +793,7 @@ namespace form
             GetAccountInformationResponseSchema responseBody;
             try
             {
-                requestText.Text = JsonSerializer.Serialize(requestBody,new JsonSerializerOptions() { WriteIndented=true});
+                requestText.Text = JsonSerializer.Serialize(requestBody, new JsonSerializerOptions() { WriteIndented = true });
                 responseBody = getAccountInformationApi.GetAccountInformation(requestBody);
                 responseText.Text = JsonSerializer.Serialize(responseBody, new JsonSerializerOptions() { WriteIndented = true });
             }
@@ -807,36 +805,36 @@ namespace form
 
         private void NotifySuspiciousEventsBtn_Click(object sender, EventArgs e)
         {
-            var notifySuspiciousEventsApi=new NotifySuspiciousEventsApi() { Client=client};
+            var notifySuspiciousEventsApi = new NotifySuspiciousEventsApi() { Client = client };
             var requestBody = new NotifySuspiciousEventsRequestSchema()
             {
                 requestId = "",
-                events=new SuspiciousEvent()
+                events = new SuspiciousEvent()
                 {
-                    eventName="",
-                    systemAtcStatus=new SystemAtcStatus()
+                    eventName = "",
+                    systemAtcStatus = new SystemAtcStatus()
                     {
                         unusedActive = [],
                         atcAlreadyProcessed = [],
                         atcNotFound = [],
                         atcReportedUsedByWallet = []
                     },
-                    walletAtcStatus=new WalletAtcStatus()
+                    walletAtcStatus = new WalletAtcStatus()
                     {
-                        unusedActive=[],
+                        unusedActive = [],
                         unusedDiscarded = [],
                         usedForContactless = [],
                         usedForDsrp = []
                     }
                 },
-                paymentAppInstanceId="",
-                status="",
-                tokenUniqueReference=""
+                paymentAppInstanceId = "",
+                status = "",
+                tokenUniqueReference = ""
             };
             NotifySuspiciousEventsResponseSchema responseBody;
             try
             {
-                requestText.Text = JsonSerializer.Serialize(requestBody,new JsonSerializerOptions() { WriteIndented=true});
+                requestText.Text = JsonSerializer.Serialize(requestBody, new JsonSerializerOptions() { WriteIndented = true });
                 responseBody = notifySuspiciousEventsApi.NotifySuspiciousEvents(requestBody);
                 responseText.Text = JsonSerializer.Serialize(responseBody, new JsonSerializerOptions() { WriteIndented = true });
             }
@@ -847,10 +845,20 @@ namespace form
         }
 
 
-        private string GenerateActivationCode(string appname,string username)
+        private string GenerateActivationCode(string appname, string username)
         {
             // generate 6 digit activation code
             return "";
+        }
+
+        private async void healthCheckBtn_ClickAsync(object sender, EventArgs e)
+        {
+            var uri = "https://sandbox.api.mastercard.com/service";
+            var method = "POST";
+            var payload = "Hello world!";
+            var encoding = Encoding.UTF8;
+            var authHeader = OAuth.GetAuthorizationHeader(uri, method, payload, encoding, consumerKey, signingKey);
+
         }
     }
 }
